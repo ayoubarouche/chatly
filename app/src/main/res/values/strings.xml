@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="email_box">E-mail</string>
+    <string name="username_box">username</string>
+    <string name="password_box">mot de passe</string>
+    <string name="password_check_box">retaper le mot de passe</string>
+    <string name="register">créer un compte ?</string>
+    <string name="login"><u>se connecter ?</u></string>
+    <string name="register_btn">créer un compte</string>
+    <string name="login_btn">connexion</string>
 </resources>
