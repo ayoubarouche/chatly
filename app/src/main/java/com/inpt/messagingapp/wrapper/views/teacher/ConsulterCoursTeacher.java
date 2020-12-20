@@ -1,4 +1,4 @@
-package com.inpt.messagingapp.wrapper.teacher;
+package com.inpt.messagingapp.wrapper.views.teacher;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.adapters.CoursViewAdapter;
-import com.inpt.messagingapp.wrapper.shared.Cour;
+import com.inpt.messagingapp.wrapper.models.Cour;
 import java.util.ArrayList;
 import java.util.List;
 

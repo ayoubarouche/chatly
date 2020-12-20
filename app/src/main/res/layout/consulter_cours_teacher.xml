@@ -7,7 +7,7 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp"
     android:fillViewport="true"
-    tools:context=".wrapper.teacher.ConsulterCoursTeacher"
+    tools:context=".wrapper.views.teacher.ConsulterCoursTeacher"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

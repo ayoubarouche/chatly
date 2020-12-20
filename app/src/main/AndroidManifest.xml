@@ -11,17 +11,23 @@
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity" >
 
+
+        </activity>
+        <activity android:name=".wrapper.views.LoginActivity">
+
+
+        </activity>
+
+
+        <activity android:name=".wrapper.views.RegisterActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wrapper.LoginActivity"/>
-
-
-        <activity android:name=".wrapper.RegisterActivity"/>
-        <activity android:name=".wrapper.teacher.ConsulterCoursTeacher">
+        <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher">
 
         </activity>
     </application>

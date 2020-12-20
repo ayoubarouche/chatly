@@ -1,4 +1,4 @@
-package com.inpt.messagingapp.wrapper;
+package com.inpt.messagingapp.wrapper.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.inpt.messagingapp.R;
+import com.inpt.messagingapp.wrapper.views.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     @Override

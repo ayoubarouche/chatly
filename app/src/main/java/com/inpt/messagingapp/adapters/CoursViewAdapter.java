@@ -11,7 +11,7 @@ import java.util.List;
 
 import android.widget.TextView;
 
-import com.inpt.messagingapp.wrapper.shared.Cour;
+import com.inpt.messagingapp.wrapper.models.Cour;
 import com.inpt.messagingapp.R;
 
 public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.ViewHolder> {

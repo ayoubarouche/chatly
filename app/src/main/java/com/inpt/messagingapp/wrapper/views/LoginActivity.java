@@ -1,4 +1,4 @@
-package com.inpt.messagingapp.wrapper;
+package com.inpt.messagingapp.wrapper.views;
 
 import android.content.Intent;
 import android.os.Bundle;
