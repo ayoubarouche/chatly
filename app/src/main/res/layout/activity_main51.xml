@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity51">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:paddingTop="15dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="40dp"
+        android:text="   Classwork  "
+        android:background="@drawable/cut_background_add_devoir"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="36sp"
+        android:textStyle="bold"/>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="20dp"
+        android:layout_margin="15dp"
+        android:rowCount="1"
+        android:columnCount="1">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_marginTop="100dp"
+            android:layout_row="0"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:background="@drawable/add_file_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/add_file_bg">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_d" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Classwork               "
+                    android:textColor="@color/colorBlack"
+                    android:textSize="26sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="280dp"
+        android:background="@color/cardview_light_background"/>
+
+
+</RelativeLayout>
