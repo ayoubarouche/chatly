@@ -7,28 +7,116 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_marginVertical="16dp"
+        android:layout_marginVertical="5dp"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:padding="16dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/raduis_for_card_view"
+            android:orientation="horizontal"
+           >
 
-            <TextView
-                android:id="@+id/textViewHead"
-                android:text="Heading"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+            <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/textViewDesc"
-                android:text="Description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="9pt"
+                    android:text="heading"
+                    android:paddingVertical="5dp"
+                    android:textAlignment="center"
+                    android:textColor="#ffff"
+                    android:background="@drawable/header_background_gradiant"
+                    />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:padding="6dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="lkdjf jdlkjfkd kldjkld kldj fldkjdkl fjkldfj kdljfk dljfkdl jfkldj fkldjf kld jf kldjfk djkfl jdkjkfldj dkjfkld jfkldj fk"
+                    android:textColor="#000"
+                    android:textAlignment="center"
+                    android:textSize="6pt"
+
+                    />
+                <LinearLayout
+                    android:padding="0dp"
+
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="10dp"
+                android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:background="@drawable/raduis_for_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/delete_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/delete_icon"
+                        android:padding="0dp"
+                        android:backgroundTint="#fff"
+                        />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SUPPRIMER"
+                            android:paddingHorizontal="5dp"
+                            android:textColor="#fff"
+                            android:labelFor="@id/delete_btn"/>
+                    </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:background="#2BA504"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/consulter"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/show_icon"
+                        android:padding="0dp"
+                        android:backgroundTint="#fff"
+                    />
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="CONSULTER"
+                       android:paddingHorizontal="5dp"
+                       android:textColor="#fff"
+                       android:labelFor="@id/consulter"/>
+                </LinearLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
 

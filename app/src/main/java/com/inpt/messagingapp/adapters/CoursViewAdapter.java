@@ -37,6 +37,7 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
         Cour cour = cours.get(position);
         holder.textViewHead.setText(cour.getHead());
         holder.textViewDesc.setText(cour.getDesc());
+
     }
 
     @Override
@@ -52,8 +53,8 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textViewHead = (TextView) itemView.findViewById(R.id.textViewHead);
-            textViewDesc = (TextView) itemView.findViewById(R.id.textViewDesc);
+            textViewHead = (TextView) itemView.findViewById(R.id.header);
+            textViewDesc = (TextView) itemView.findViewById(R.id.description);
         }
     }
 }
