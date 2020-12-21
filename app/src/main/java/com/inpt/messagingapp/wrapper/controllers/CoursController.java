@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CoursController {
     //uid c'est le user id
-    public List<Cour> getCourses(String uid);
+    public List<Cour> getCourses();
 
 }

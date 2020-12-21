@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
+import com.inpt.messagingapp.wrapper.models.User;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TeacherCoursController tcontroller = new TeacherCoursController();
-                tcontroller.insertCours(new Cour("hello world","life is hard"));
+                tcontroller.addCour(new Cour("helloworldid ","developpement android","hello wrold",null));
             }
         });
     }

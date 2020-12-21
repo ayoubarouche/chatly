@@ -11,12 +11,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.inpt.messagingapp.wrapper.controllers.CoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
+import com.inpt.messagingapp.wrapper.models.User;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TeacherCoursController implements CoursController {
+    User teacher;
    static private FirebaseFirestore db;
     static String TAG  = "hello world";
     public TeacherCoursController(){
@@ -24,16 +26,36 @@ public class TeacherCoursController implements CoursController {
 
     }
     @Override
-    public List<Cour> getCourses(String uid) {
+    public List<Cour> getCourses() {
         return null;
     }
-    public boolean DeleteCour(String coursId){
+    public boolean supprimerCour(String coursId){
         return true;
+    }
+    public Cour getCour(String courseId){
+        return null;
     }
 
     //for test code hadi 4ir kantester la base de donnnes 5edama mezian hmd li lah
 
-    public void insertCours(Cour cour){
+    public User getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
+    }
+
+    public TeacherCoursController(User teacher) {
+        this.teacher = teacher;
+    }
+    public String courId(){
+        return null;
+    }
+    public List<User> getCourStudents(){
+        return null;
+    }
+    public void addCour(Cour cour){
         Map<String, Object> user = new HashMap<>();
         user.put("first", "Alan");
         user.put("middle", "Mathison");
@@ -51,5 +73,8 @@ public class TeacherCoursController implements CoursController {
                 Log.d(TAG ,"insert failed");
             }
         });
+    }
+    public boolean deleteCour(Cour cour){
+        return false;
     }
 }
