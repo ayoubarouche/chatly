@@ -33,10 +33,7 @@ public class ConsulterCoursTeacher extends AppCompatActivity {
 
         cours = new ArrayList<>();
         for (int i = 0; i <= 10; i++) {
-            Cour listItem = new Cour(
-                    "developpement android cour " + (i + 1),
-                    "tester les fragement et essayer de develooper une application"
-            );
+            Cour listItem =    new Cour(null,"hello world : "+i,"description "+i,null);
             cours.add(listItem);
         }
  ajouter.setOnClickListener(new View.OnClickListener() {

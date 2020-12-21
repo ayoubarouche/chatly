@@ -51,70 +51,9 @@
                     android:textSize="6pt"
 
                     />
-                <LinearLayout
-                    android:padding="0dp"
-
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="10dp"
-                android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:padding="5dp"
-                        android:background="@drawable/raduis_for_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
-                        <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/delete_btn"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/delete_icon"
-                        android:padding="0dp"
-                        android:backgroundTint="#fff"
-                        />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SUPPRIMER"
-                            android:paddingHorizontal="5dp"
-                            android:textColor="#fff"
-                            android:labelFor="@id/delete_btn"/>
-                    </LinearLayout>
 
 
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    android:background="#2BA504"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    >
-                    <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/consulter"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/show_icon"
-                        android:padding="0dp"
-                        android:backgroundTint="#fff"
-                    />
-
-                   <androidx.appcompat.widget.AppCompatTextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="CONSULTER"
-                       android:paddingHorizontal="5dp"
-                       android:textColor="#fff"
-                       android:labelFor="@id/consulter"/>
-                </LinearLayout>
-
-
-
-                </LinearLayout>
             </LinearLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

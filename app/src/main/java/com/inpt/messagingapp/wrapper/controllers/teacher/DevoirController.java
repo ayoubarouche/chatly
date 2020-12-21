@@ -31,8 +31,8 @@ public class DevoirController {
         this.teacher = teacher ;
         this.cour = cour;
     }
-    public boolean addDevoir(Devoir devoir){
-        return false;
+    public Devoir addDevoir(Devoir devoir){
+        return null;
     }
     public List<Devoir> getDevoirs(){
         return null;

@@ -11,8 +11,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.inpt.messagingapp.wrapper.controllers.CoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
+import com.inpt.messagingapp.wrapper.models.Devoir;
 import com.inpt.messagingapp.wrapper.models.User;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,26 +57,37 @@ public class TeacherCoursController implements CoursController {
     public List<User> getCourStudents(){
         return null;
     }
-    public void addCour(Cour cour){
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Alan");
-        user.put("middle", "Mathison");
-        user.put("last", "Turing");
-        user.put("born", 1912);
+    public Cour addCour(Cour cour){
 
-        db.collection("cours").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+       DocumentReference documentReference =  db.collection("cours").document();
+
+    documentReference.set(cour).addOnSuccessListener(new OnSuccessListener<Void>() {
+           @Override
+           public void onSuccess(Void aVoid) {
+               Log.d(TAG , "ajouter avec succes");
+
+           }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               Log.e(TAG,"failed to add the document");
+           }
+       });
+    cour.setIdCour(documentReference.getId() );
+    return  cour;
+    }
+    public void deleteCour(Cour cour){
+        db.collection("cours").document(cour.getIdCour()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d(TAG ,"insert succes");
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "onSuccess: delete with succes");
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG ,"insert failed");
+                Log.d(TAG, "onFailure: failed to delete");
             }
         });
-    }
-    public boolean deleteCour(Cour cour){
-        return false;
     }
 }

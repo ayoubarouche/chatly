@@ -3,7 +3,7 @@ package com.inpt.messagingapp.wrapper.models;
 import java.util.Date;
 
 public class Message {
-    private User from ; // the user who send the message
+    private String from ; // the user who send the message
    private  String message ; // the message sent by the user
 
     public Message() {
@@ -11,11 +11,11 @@ public class Message {
 
     private String date ; // when the user sent the message
 
-    public User getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(User from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
@@ -35,7 +35,7 @@ public class Message {
         this.date = date;
     }
 
-    public Message(User from, String message, String date) {
+    public Message(String from, String message, String date) {
         this.from = from;
         this.message = message;
         this.date = date;

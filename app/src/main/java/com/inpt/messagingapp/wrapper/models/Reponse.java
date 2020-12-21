@@ -2,7 +2,7 @@ package com.inpt.messagingapp.wrapper.models;
 
 public class Reponse {
     private String idReponse ;
-    private User student ;
+    private String student ;
     private String file;
     public String getIdReponse() {
         return idReponse;
@@ -12,11 +12,11 @@ public class Reponse {
         this.idReponse = idReponse;
     }
 
-    public User getStudent() {
+    public String getStudent() {
         return student;
     }
 
-    public void setStudent(User student) {
+    public void setStudent(String student) {
         this.student = student;
     }
 
@@ -31,7 +31,7 @@ public class Reponse {
         this.file = file;
     }
 
-    public Reponse(String idReponse, User student, String file) {
+    public Reponse(String idReponse, String student, String file) {
         this.idReponse = idReponse;
         this.student = student;
         this.file = file ;

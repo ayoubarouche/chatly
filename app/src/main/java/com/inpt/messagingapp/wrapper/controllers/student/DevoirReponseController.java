@@ -30,8 +30,8 @@ public class DevoirReponseController {
         this.student = student;
         this.cour = cour;
     }
-    public boolean addReponse(Reponse reponse){
-        return false ;
+    public Reponse addReponse(Reponse reponse){
+        return null ;
     }
     public Reponse getReponse (String idReponse){
         return null;

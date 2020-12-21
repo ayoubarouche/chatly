@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Cour  {
     private String idCour ; // hna id dyal cours
-   private User teacher ; // the teacher of the cour
+   private String teacher ; // the teacher of the cour
     private List<User> students ; // list des etudiant du cours
-    private List<Devoir> devoirs ; // list des devoir du cours
-    private List<Message> messages ; // list des messages du chat sur le cours
+    public List<Devoir> devoirs ; // list des devoir du cours
+    public List<Message> messages ; // list des messages du chat sur le cours
     private String description = "aucun description sur le cours" ; // pour la description sur le cours
    private String titre ="aucun titre pour le cours" ; // pour le titre du cour
     private String file ; // la place du fichier dans google storage dans firebase
-    public Cour(String idCour,String titre, String desc,User teacher){
+    public Cour(String idCour,String titre, String desc,String teacher){
         this.titre = titre;
         this.description = desc;
         this.teacher = teacher;
@@ -21,7 +21,7 @@ public class Cour  {
     public Cour() {
     }
 
-    public Cour(String idCour, User teacher, List<User> students, List<Devoir> devoirs, List<Message> messages, String description, String titre, String file) {
+    public Cour(String idCour, String teacher, List<User> students, List<Devoir> devoirs, List<Message> messages, String description, String titre, String file) {
         this.teacher = teacher;
         this.students = students;
         this.devoirs = devoirs;
@@ -32,11 +32,11 @@ public class Cour  {
         this.idCour = idCour;
     }
 
-    public User getTeacher() {
+    public String getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(User teacher) {
+    public void setTeacher(String teacher) {
         this.teacher = teacher;
     }
 
@@ -48,13 +48,17 @@ public class Cour  {
         this.students = students;
     }
 
-    public List<Devoir> getDevoirs() {
-        return devoirs;
+
+
+    public String getIdCour() {
+        return idCour;
     }
 
-    public void setDevoirs(List<Devoir> devoirs) {
-        this.devoirs = devoirs;
+    public void setIdCour(String idCour) {
+        this.idCour = idCour;
     }
+
+
 
     public List<Message> getMessages() {
         return messages;

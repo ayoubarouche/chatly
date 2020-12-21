@@ -35,8 +35,8 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cour cour = cours.get(position);
-        holder.textViewHead.setText(cour.getHead());
-        holder.textViewDesc.setText(cour.getDesc());
+        holder.textViewHead.setText(cour.getTitre());
+        holder.textViewDesc.setText(cour.getDescription());
 
     }
 

@@ -24,8 +24,8 @@ public class MessageController {
     public List<Message> getCourMessages(){
         return null ;
     }
-    public boolean addMesssage( Message message){
-        return false;
+    public Message addMesssage( Message message){
+        return null;
     }
     public Message getMessage(){
         return null;
