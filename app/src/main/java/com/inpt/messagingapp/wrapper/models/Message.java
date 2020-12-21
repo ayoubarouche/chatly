@@ -5,7 +5,11 @@ import java.util.Date;
 public class Message {
     private User from ; // the user who send the message
    private  String message ; // the message sent by the user
-   private String date ; // when the user sent the message
+
+    public Message() {
+    }
+
+    private String date ; // when the user sent the message
 
     public User getFrom() {
         return from;

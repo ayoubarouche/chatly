@@ -18,7 +18,10 @@ public class Cour  {
         this.idCour = idCour;
     }
 
-    public Cour(String idCour,User teacher, List<User> students, List<Devoir> devoirs, List<Message> messages, String description, String titre,String file) {
+    public Cour() {
+    }
+
+    public Cour(String idCour, User teacher, List<User> students, List<Devoir> devoirs, List<Message> messages, String description, String titre, String file) {
         this.teacher = teacher;
         this.students = students;
         this.devoirs = devoirs;

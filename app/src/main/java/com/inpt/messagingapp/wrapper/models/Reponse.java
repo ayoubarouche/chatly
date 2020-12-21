@@ -20,6 +20,9 @@ public class Reponse {
         this.student = student;
     }
 
+    public Reponse() {
+    }
+
     public String getFile() {
         return file;
     }

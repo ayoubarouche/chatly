@@ -54,6 +54,9 @@ public class User {
         this.username = username;
     }
 
+    public User() {
+    }
+
     public User(String email, UserType type, String idUser, String name, String prenom, String username) {
         this.email = email;
         this.type = type;

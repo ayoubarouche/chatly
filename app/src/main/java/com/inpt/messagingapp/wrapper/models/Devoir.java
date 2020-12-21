@@ -17,6 +17,9 @@ private List<String> reponses; // les reponses des etudiant
 
     private String titre;            // le titre du devoir
 
+    public Devoir() {
+    }
+
     public List<String> getReponses() {
         return reponses;
     }
