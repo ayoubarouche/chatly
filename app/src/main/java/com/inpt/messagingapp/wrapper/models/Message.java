@@ -5,6 +5,15 @@ import java.util.Date;
 public class Message {
     private String from ; // the user who send the message
    private  String message ; // the message sent by the user
+    private String idMessage;
+
+    public String getIdMessage() {
+        return idMessage;
+    }
+
+    public void setIdMessage(String idMessage) {
+        this.idMessage = idMessage;
+    }
 
     public Message() {
     }

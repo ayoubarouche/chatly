@@ -59,6 +59,13 @@ public class Cour  {
     }
 
 
+    public List<Devoir> getDevoirs() {
+        return devoirs;
+    }
+
+    public void setDevoirs(List<Devoir> devoirs) {
+        this.devoirs = devoirs;
+    }
 
     public List<Message> getMessages() {
         return messages;

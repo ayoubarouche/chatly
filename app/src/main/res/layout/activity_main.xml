@@ -10,6 +10,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/hel"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:text="hello world"
