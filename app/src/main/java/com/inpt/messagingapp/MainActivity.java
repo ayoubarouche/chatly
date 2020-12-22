@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     button1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            tcontroller.deleteCour(cour);
-            Log.d("hello world", "onClick: delete the cour now");
+            Cour new_cour = tcontroller.getCour(cour.getIdCour());
+            Log.d("hello world", "the cour is : added and : "+new_cour.getIdCour());
         }
     });
     }

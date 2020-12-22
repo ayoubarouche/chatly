@@ -5,9 +5,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.inpt.messagingapp.wrapper.controllers.CoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
@@ -21,6 +24,7 @@ import java.util.Map;
 
 public class TeacherCoursController implements CoursController {
     User teacher;
+    Cour tempcour ;
    static private FirebaseFirestore db;
     static String TAG  = "hello world";
     public TeacherCoursController(){
@@ -34,10 +38,16 @@ public class TeacherCoursController implements CoursController {
     public boolean supprimerCour(String coursId){
         return true;
     }
-    public Cour getCour(String courseId){
-        return null;
+    public Cour getCour(String courseId) {
+        tempcour = new Cour();
+        db.collection("cours").document(courseId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                tempcour = documentSnapshot.toObject(Cour.class);
+            }
+        });
+        return tempcour;
     }
-
     //for test code hadi 4ir kantester la base de donnnes 5edama mezian hmd li lah
 
     public User getTeacher() {
