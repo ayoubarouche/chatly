@@ -24,4 +24,5 @@ public interface ControllerLocale {
     public void updateDevoirL(Devoir devoir);
     public void updateUserL(User user);
     public void updateReponseL(Reponse reponse);
+
 }
