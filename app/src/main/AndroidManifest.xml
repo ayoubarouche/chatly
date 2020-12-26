@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity52"></activity>
+        <activity android:name=".AjouterDevActivity"></activity>
+        <activity android:name=".AjouterCourActivity" />
+        <activity android:name=".MainActivity52" />
         <activity android:name=".MainActivity51" />
         <activity android:name=".MainActivity4" />
         <activity android:name=".MainActivity3" />
@@ -19,21 +21,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".wrapper.views.LoginActivity">
-
-
-        </activity>
-
-
-        <activity android:name=".wrapper.views.RegisterActivity">
-
-
-        </activity>
-        <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher">
-
-        </activity>
+        <activity android:name=".wrapper.views.LoginActivity" />
+        <activity android:name=".wrapper.views.RegisterActivity" />
+        <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher" />
     </application>
 
 </manifest>
