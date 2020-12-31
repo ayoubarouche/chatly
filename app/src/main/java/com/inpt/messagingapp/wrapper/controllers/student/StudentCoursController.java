@@ -27,7 +27,7 @@ public class StudentCoursController implements CoursController {
     FirebaseFirestore db;
     @Override
     public List<Cour> getCourses() {
-
+        courses = new ArrayList<>();
         db.collection("cours")
                 .whereArrayContains("students",student.getIdUser())
                 .get()
@@ -35,7 +35,7 @@ public class StudentCoursController implements CoursController {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            courses = new ArrayList<>();
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 CourFirebase firebasecour = document.toObject(CourFirebase.class);
                                 Cour cour = firebasecour.OriginalCours();

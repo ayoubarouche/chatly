@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.inpt.messagingapp.helpers.firebaseHelpers.FireBaseConnector;
 import com.inpt.messagingapp.helpers.firebaseHelpers.mappingHelpers.CourFirebase;
+import com.inpt.messagingapp.wrapper.controllers.UserController;
 import com.inpt.messagingapp.wrapper.controllers.student.StudentCoursController;
 import com.inpt.messagingapp.wrapper.controllers.teacher.DevoirController;
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
@@ -37,27 +39,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //og.d("hello world", "onClick: the cour is added");
-                User student = new User();
-                student.setIdUser("helloworld");
-                StudentCoursController sccontroller = new StudentCoursController(student);
-               List<Cour> courses = sccontroller.getCourses();
 
-               for(Cour cou : courses){
-                   Log.d("mainactivity button ", "onClick: the course id is  "+cou.getIdCour());
-               }
+                User user = new User("hello@gmail.com",UserType.teacher,"testindid","ayoub","arouche","ayoubarouche");
+     signup(user);
+
+
+
+             //   User user2 = ucontroller.getUser("5a2Aj9swf2R00rTfDbeTnVAxoMw1");
+
             }
         });
     button1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            User student = new User();
-            student.setIdUser("helloworld");
-            StudentCoursController sccontroller = new StudentCoursController(student);
-            sccontroller.inscritCour("XoUKDkEnZT6E1XF5SMBA");
+
         }
     });
     }
 
-
+public void makeToast(String message){
+        Toast.makeText(this,message,Toast.LENGTH_LONG);
+}
+public void signup(User user){
+    UserController ucontroller = new UserController();
+    ucontroller.login(user.getEmail() , "helloworld");
+    User user2 = ucontroller.getUser();
+    if (user2 != null) {
+        System.out.println("email : " + user2.getEmail()+ " id : "+user2.getEmail());
+        Log.d("mainactivity", "onClick: the user is : " + user2.getIdUser() +" nom is : "+user2.getName());
+        makeToast("onClick: the user is : " + user2.getIdUser() +" nom is : "+user2.getName());
+    }else {
+        System.out.println("user is null");
+    }
+    }
 }
