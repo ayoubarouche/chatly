@@ -21,5 +21,7 @@
         il contient les activite pour l'affichage des données comme MainActivity.java , LoginActivity.java
 
 # bon programmation
+# ACTIVITIES STRUCTURE
+
 
 

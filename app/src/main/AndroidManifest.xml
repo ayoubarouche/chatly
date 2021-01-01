@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".first"/>
         <activity android:name=".AjouterDevActivity"></activity>
         <activity android:name=".AjouterCourActivity" />
         <activity android:name=".MainActivity52" />
