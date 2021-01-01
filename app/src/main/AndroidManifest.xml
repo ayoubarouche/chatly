@@ -22,9 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wrapper.views.LoginActivity" />
-        <activity android:name=".wrapper.views.RegisterActivity" />
+        <activity android:name=".project.shared.LoginActivity" />
+        <activity android:name=".project.shared.RegisterActivity" />
         <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher" />
+        <activity android:name=".project.WelcomeActivity"/>
+        <activity android:name=".project.shared.CoursActivity"/>
+        <activity android:name=".project.teacher.AjouterCourActivity"/>
+        <activity android:name=".project.teacher.AjouterDevoirActivity"/>
+        <activity android:name=".project.teacher.ReponsesActivity"/>
+        <activity android:name=".project.shared.DevoirsActivity"/>
+        <activity android:name=".project.shared.ChatActivity"/>
+        <activity android:name=".project.student.AjouterReponseActivity"/>
+        <activity android:name=".project.teacher.TeacherCourOperationsActivity"/>
+        <activity android:name=".project.student.StudentCourOperationsActivity"/>
     </application>
 
 </manifest>
