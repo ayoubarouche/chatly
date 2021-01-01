@@ -7,37 +7,16 @@
     tools:context=".AjouterDevActivity">
 
     <EditText
-        android:id="@+id/addfile"
-        android:layout_width="353dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:background="@drawable/edittext_background"
-        android:drawableLeft="@drawable/ic_attach_file"
-        android:drawablePadding="25dp"
-        android:drawableTint="#B8B8B8"
-        android:hint="File"
-        android:inputType="text"
-        android:padding="12dp"
-        android:textColor="@color/colorP3"
-        android:textColorHighlight="@color/colorP3"
-        android:textColorHint="@color/colorP3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="200dp" />
-
-    <EditText
         android:id="@+id/addDescription"
         android:layout_width="353dp"
         android:layout_height="64dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/edittext_background"
-        android:drawableLeft="@drawable/ic_date"
+        android:drawableLeft="@drawable/password_icon"
         android:drawablePadding="25dp"
         android:drawableTint="#B8B8B8"
-        android:hint="Ajouter date"
+        android:hint="Saisir le code de votre cour"
         android:inputType="date"
         android:padding="12dp"
         android:textColor="@color/colorP3"
@@ -46,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="103dp" />
+        tools:layout_editor_absoluteY="138dp" />
 
     <Button
         android:id="@+id/ajouter"
@@ -84,8 +63,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="414dp"
-        android:layout_height="377dp"
+        android:layout_width="412dp"
+        android:layout_height="430dp"
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,13 +74,4 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/cut_background" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="36dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/addfile"
-        app:layout_constraintEnd_toEndOf="@+id/addfile"
-        app:layout_constraintTop_toTopOf="@+id/addfile"
-        app:srcCompat="@drawable/ic_add_dev" />
 </androidx.constraintlayout.widget.ConstraintLayout>
