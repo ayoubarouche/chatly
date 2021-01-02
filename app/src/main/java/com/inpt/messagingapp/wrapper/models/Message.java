@@ -18,7 +18,7 @@ public class Message {
     public Message() {
     }
 
-    private String date ; // when the user sent the message
+    private Date date ; // when the user sent the message
 
     public String getFrom() {
         return from;
@@ -36,15 +36,15 @@ public class Message {
         this.message = message;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public Message(String from, String message, String date) {
+    public Message(String from, String message, Date date) {
         this.from = from;
         this.message = message;
         this.date = date;

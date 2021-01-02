@@ -37,25 +37,26 @@ public class MessageController {
         documentReference = db.collection("cours").document(cour.getIdCour());
         this.cour = cour;
     }
-    public List<Message> getCourMessages(){
+    public List<Message> getCourMessages(final OnGettedMessages onGettedMessages){
         tempmessages = new ArrayList<>();
 
-         documentReference.collection("messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+         documentReference.collection("messages").orderBy("date").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                List<Message> messageList = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Message message = document.toObject(Message.class);
-                        tempmessages.add(message);
+                        messageList.add(message);
                         Log.d("messages controller", document.getId() + " => " + document.getData());
                     }
-
+                onGettedMessages.OnCallBack(messageList);
                 }
             }
         });
         return tempmessages;
     }
-    public Message addMesssage(Message message){
+    public Message addMesssage(Message message , final OnMessageSent onMessageSent){
         tempmessage = message;
         DocumentReference documentReference1 = documentReference.collection("messages").document();
         tempmessage.setIdMessage(documentReference1.getId());
@@ -63,10 +64,15 @@ public class MessageController {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d("message controller", "onSuccess: the message has been added succes");
+                onMessageSent.OnCallBack(tempmessage);
             }
         });
         return tempmessage;
     }
-
-
+    public interface OnGettedMessages{
+        public void OnCallBack(List<Message> messages);
+    }
+    public interface OnMessageSent{
+        public void OnCallBack(Message message);
+    }
 }

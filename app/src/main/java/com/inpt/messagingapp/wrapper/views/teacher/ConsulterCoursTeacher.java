@@ -52,7 +52,7 @@ public class ConsulterCoursTeacher extends AppCompatActivity {
            public void OnCallBack(List<Cour> courses) {
                cours = courses ;
                Toast.makeText(getApplicationContext(),"the courses are returned size is : "+cours.size(),Toast.LENGTH_LONG).show();
-               adapter = new CoursViewAdapter(cours, getApplicationContext());
+               adapter = new CoursViewAdapter(cours, getApplicationContext(),app);
                recyclerView.setAdapter(adapter);
            }
 

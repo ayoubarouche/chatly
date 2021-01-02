@@ -52,7 +52,7 @@ public class CoursActivity extends AppCompatActivity {
             public void OnCallBack(List<Cour> courses) {
                 cours = courses ;
                 Toast.makeText(getApplicationContext(),"the teacher courses are returned size is : "+cours.size(),Toast.LENGTH_LONG).show();
-                adapter = new CoursViewAdapter(cours, getApplicationContext());
+                adapter = new CoursViewAdapter(cours, getApplicationContext(),app);
                 recyclerView.setAdapter(adapter);
             }
         });
@@ -67,7 +67,7 @@ public class CoursActivity extends AppCompatActivity {
             public void OnCallBack(List<Cour> courses) {
                 cours = courses ;
                 Toast.makeText(getApplicationContext(),"the student courses are returned size is : "+cours.size(),Toast.LENGTH_LONG).show();
-                adapter = new CoursViewAdapter(cours, getApplicationContext());
+                adapter = new CoursViewAdapter(cours, getApplicationContext(),app);
                 recyclerView.setAdapter(adapter);
             }
 
