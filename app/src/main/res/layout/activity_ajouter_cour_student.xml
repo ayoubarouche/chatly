@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp"
+    android:fillViewport="true"
+    tools:context=".project.student.AjouterCourStudent"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="5dp"
+        android:background="@drawable/header_background_gradiant"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        >
+        <RelativeLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imagetitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cours_image"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="210dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/imagetitle"
+                android:layout_alignLeft="@+id/imagetitle"
+                android:layout_alignRight="@+id/imagetitle"
+                android:layout_marginLeft="-43dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="-36dp"
+                android:text="ajouter un cour"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="30dp" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:id="@+id/cour_id_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="60dp"
+            android:hint="entrer le code donné par votre professeur"
+            android:textColorHighlight="@color/colorPrimary"
+            android:drawablePadding="25dp"
+            android:drawableTint="#B8B8B8"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColorHint="@color/colorPrimary"
+            android:inputType="textEmailAddress"
+            android:layout_marginEnd="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_register" />
+        <Button
+            android:id="@+id/ajouter_cour_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_style"
+            android:text="ajouter le cour"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cour_id_box" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

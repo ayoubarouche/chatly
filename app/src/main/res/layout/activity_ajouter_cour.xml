@@ -45,8 +45,9 @@
         android:id="@+id/addtitre"
         android:layout_width="353dp"
         android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/title"
         android:drawablePadding="25dp"
@@ -57,17 +58,18 @@
         android:textColor="@color/colorP3"
         android:textColorHighlight="@color/colorP3"
         android:textColorHint="@color/colorP3"
+        app:layout_constraintBottom_toTopOf="@+id/addDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="94dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/addfile"
         android:layout_width="353dp"
         android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/ic_attach_file"
         android:drawablePadding="25dp"
@@ -78,17 +80,18 @@
         android:textColor="@color/colorP3"
         android:textColorHighlight="@color/colorP3"
         android:textColorHint="@color/colorP3"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="306dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/addDescription"
         android:layout_width="353dp"
         android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/title"
         android:drawablePadding="25dp"
@@ -99,10 +102,10 @@
         android:textColor="@color/colorP3"
         android:textColorHighlight="@color/colorP3"
         android:textColorHint="@color/colorP3"
+        app:layout_constraintBottom_toTopOf="@+id/addfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="202dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView"

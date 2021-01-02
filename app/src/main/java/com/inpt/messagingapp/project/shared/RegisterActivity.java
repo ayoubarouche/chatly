@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(this ,erreur , Toast.LENGTH_LONG).show();
     }
     public void changeToHomePage(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CoursActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         this.finish();

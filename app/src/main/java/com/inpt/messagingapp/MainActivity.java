@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
          button = findViewById(R.id.hello_world);
          button.setText("ajouter cour");
+         /*
          button.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -51,26 +52,8 @@ public class MainActivity extends AppCompatActivity {
              public void onClick(View view) {
                  goToCours();
              }
-         });
+         });*/
     }
-    public void addCour(){
-    GlobalApplication app = (GlobalApplication)getApplication();
-    app.setTeacherCoursController();
-    Cour cour1 = new Cour(null,app.getUser().getIdUser(),null,null,null,"hello world description","hello world","life is hard");
-    app.teacherCoursController.addCour(cour1, new TeacherCoursController.OnCourAdded() {
-        @Override
-        public void onCallBack(Cour cour) {
-            general_cour = cour;
-            Toast.makeText(getApplicationContext() ,"the cour is added cour_id is : "+general_cour.getIdCour(),Toast.LENGTH_LONG).show();
-        }
-    });
-        Toast.makeText(getApplicationContext() ,"we are adding the cours",Toast.LENGTH_LONG).show();
 
-    }
-    public void goToCours(){
-        Intent intent = new Intent(this, CoursActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
-        this.finish();
-    }
+
 }

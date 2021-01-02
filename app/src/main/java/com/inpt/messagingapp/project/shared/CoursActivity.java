@@ -1,5 +1,6 @@
 package com.inpt.messagingapp.project.shared;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,9 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.inpt.messagingapp.project.teacher.AjouterCourActivity;
 import com.inpt.messagingapp.GlobalApplication;
+import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.adapters.CoursViewAdapter;
+import com.inpt.messagingapp.project.student.AjouterCourStudent;
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
 import com.inpt.messagingapp.wrapper.models.UserType;
@@ -39,12 +43,25 @@ public class CoursActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG,"you clicked add cours");
+                changeToAddCourPage();
             }
         });
         if(app.getUser().getType() == UserType.teacher)getCoursesTeacher();
         else getCoursesStudent();
     }
+    public void changeToAddCourPage(){
+        Intent intent ;
+        if(app.getUser().getType() == UserType.student) {
+            intent = new Intent(this, AjouterCourStudent.class);
 
+        }
+        else{
+            intent = new Intent(this, AjouterCourActivity.class);
+
+        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
     public void getCoursesTeacher(){
         if(app.getTeacherCoursController()==null)app.setTeacherCoursController();
         app.getTeacherCoursController().getCourses(new TeacherCoursController.OnGettingCourses() {

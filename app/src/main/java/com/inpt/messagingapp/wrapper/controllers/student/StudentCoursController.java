@@ -70,15 +70,19 @@ return courses;
         this.student = student;
         db = FirebaseFirestore.getInstance();
     }
-    public void inscritCour(String IdCour){
+    public void inscritCour(String IdCour, final OnAfterRegisterInCour onAfterRegisterInCour){
        db.collection("cours")
                .document(IdCour)
                .update("students", FieldValue.arrayUnion(student.getIdUser()))
                .addOnSuccessListener(new OnSuccessListener<Void>() {
            @Override
            public void onSuccess(Void aVoid) {
+               onAfterRegisterInCour.OnCallBack();
                Log.d("studentcourcontroller", "onSuccess: student added with succes");
            }
        });
+    }
+    public interface OnAfterRegisterInCour{
+        public void OnCallBack();
     }
 }

@@ -16,7 +16,7 @@
         <activity android:name=".MainActivity51" />
         <activity android:name=".MainActivity4" />
         <activity android:name=".MainActivity3" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".project.shared.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".project.shared.RegisterActivity"></activity>
+        <activity android:name=".project.shared.RegisterActivity" />
         <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher" />
         <activity android:name=".project.WelcomeActivity" />
         <activity android:name=".project.shared.CoursActivity" />
@@ -36,6 +36,7 @@
         <activity android:name=".project.student.AjouterReponseActivity" />
         <activity android:name=".project.teacher.TeacherCourOperationsActivity" />
         <activity android:name=".project.student.StudentCourOperationsActivity" />
+        <activity android:name=".project.student.AjouterCourStudent"/>
 
         <meta-data
             android:name="preloaded_fonts"
