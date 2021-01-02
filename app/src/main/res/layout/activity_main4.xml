@@ -57,6 +57,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/add_msg"
         app:layout_constraintEnd_toEndOf="@+id/add_msg"
         app:layout_constraintTop_toTopOf="@+id/add_msg"
