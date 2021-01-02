@@ -74,7 +74,7 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SqliteConnector myDB = new SqliteConnector(StudentCourOperationsActivity.this);
-                myDB.deleteCourL(id);
+                myDB.deleteCourL(null);
                 finish();
             }
         });
