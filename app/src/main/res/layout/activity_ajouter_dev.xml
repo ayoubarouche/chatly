@@ -27,6 +27,16 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="138dp" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="36dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/addDescription"
+        app:layout_constraintEnd_toEndOf="@+id/addDescription"
+        app:layout_constraintTop_toTopOf="@+id/addDescription"
+        app:srcCompat="@drawable/ic_add_dev" />
+
     <Button
         android:id="@+id/ajouter"
         android:layout_width="137dp"

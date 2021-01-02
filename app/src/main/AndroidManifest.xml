@@ -3,49 +3,43 @@
     package="com.inpt.messagingapp">
 
     <application
-        android:name = ".GlobalApplication"
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AjouterDevActivity"></activity>
+        <activity android:name=".AjouterDevActivity" />
         <activity android:name=".AjouterCourActivity" />
         <activity android:name=".MainActivity52" />
         <activity android:name=".MainActivity51" />
         <activity android:name=".MainActivity4" />
         <activity android:name=".MainActivity3" />
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".project.shared.LoginActivity" >
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".project.shared.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".project.shared.RegisterActivity" >
-
-
-        </activity>
+        <activity android:name=".project.shared.RegisterActivity"></activity>
         <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher" />
-        <activity android:name=".project.WelcomeActivity"/>
-        <activity android:name=".project.shared.CoursActivity"/>
-        <activity android:name=".project.teacher.AjouterCourActivity"/>
-        <activity android:name=".project.teacher.AjouterDevoirActivity"/>
-        <activity android:name=".project.teacher.ReponsesActivity"/>
-        <activity android:name=".project.shared.DevoirsActivity"/>
-        <activity android:name=".project.shared.ChatActivity"/>
-        <activity android:name=".project.student.AjouterReponseActivity"/>
-        <activity android:name=".project.teacher.TeacherCourOperationsActivity"/>
-        <activity android:name=".project.student.StudentCourOperationsActivity"/>
-        <meta-data android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts"/>
+        <activity android:name=".project.WelcomeActivity" />
+        <activity android:name=".project.shared.CoursActivity" />
+        <activity android:name=".project.teacher.AjouterCourActivity" />
+        <activity android:name=".project.teacher.AjouterDevoirActivity" />
+        <activity android:name=".project.teacher.ReponsesActivity" />
+        <activity android:name=".project.shared.DevoirsActivity" />
+        <activity android:name=".project.shared.ChatActivity" />
+        <activity android:name=".project.student.AjouterReponseActivity" />
+        <activity android:name=".project.teacher.TeacherCourOperationsActivity" />
+        <activity android:name=".project.student.StudentCourOperationsActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
-
-
 
 </manifest>

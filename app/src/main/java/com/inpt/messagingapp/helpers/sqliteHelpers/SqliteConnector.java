@@ -45,7 +45,7 @@ public class SqliteConnector extends SQLiteOpenHelper implements ControllerLocal
     private static final String COL_REPONSE_L_2 = "student";
     private static final String COL_REPONSE_L_3 = "file";
 
-    SqliteConnector(@Nullable Context context) {
+    public SqliteConnector(@Nullable Context context) {
         super(context, DATABASE_LOCALE_NAME, null, 1);
         this.context = context;
     }
