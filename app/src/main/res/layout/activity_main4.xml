@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/add_msg_bg"
-    tools:context=".MainActivity4">
+    tools:context=".project.shared.ChatActivity">
 
     <TextView
         android:id="@+id/textView"

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.inpt.messagingapp.GlobalApplication;
+import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.wrapper.controllers.UserController;
 import com.inpt.messagingapp.wrapper.models.User;
@@ -36,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app = (GlobalApplication)this.getApplication();
+        if(app.getUser()!=null)changeToHomePage();
         setContentView(R.layout.activity_register);
         initialiseWidgets(); // pour l'initailisation des widgets
 
@@ -77,8 +80,9 @@ public class RegisterActivity extends AppCompatActivity {
     public void clickToRegister() {
         selected_id = user_type.getCheckedRadioButtonId() ;
 
-                if (check())
+                if (check()){
                     register();
+                }
                 else {
                     show_the_erreur();
                 }
@@ -126,12 +130,12 @@ public class RegisterActivity extends AppCompatActivity {
         user.setName(nom);
         user.setPrenom(prenom);
         user.setUsername(username);
-        app = (GlobalApplication)this.getApplication();
        if( app.userController.signup(user, password, new UserController.AfterGettingUser() {
            @Override
            public void OnCallBack(User user) {
                app.setUser(user);
                Toast.makeText(getApplicationContext() , "the user id is "+user.getUsername(),Toast.LENGTH_LONG).show();
+               changeToHomePage();
            }
        })){
            app.setUser(user);
@@ -141,5 +145,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void show_the_erreur() {
         Toast.makeText(this ,erreur , Toast.LENGTH_LONG).show();
+    }
+    public void changeToHomePage(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        this.finish();
     }
 }

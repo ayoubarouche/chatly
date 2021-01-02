@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.inpt.messagingapp.GlobalApplication;
+import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.wrapper.controllers.UserController;
 import com.inpt.messagingapp.wrapper.models.User;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app = (GlobalApplication)getApplication();
+        if(app.getUser()!=null)changeToHomePage();
         setContentView(R.layout.activity_login);
         initialiseWidgets();
 
@@ -49,7 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         this.finish();
     }
-
+    public void changeToHomePage(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        this.finish();
+    }
     @SuppressLint("WrongViewCast")
     public void initialiseWidgets() {
         email_box = findViewById(R.id.email_box);
@@ -81,16 +89,17 @@ public class LoginActivity extends AppCompatActivity {
     public void login(){
         String password = this.password_box.getText().toString();
         String email = this.email_box.getText().toString();
-    app = (GlobalApplication)this.getApplication();
+
         app.userController.login(email, password, new UserController.AfterGettingUser() {
             @Override
             public void OnCallBack(User user) {
                 app.setUser(user);
                 User user2 = app.getUser();
                 Toast.makeText(getApplicationContext() , "the user is : "+user2.getPrenom(),Toast.LENGTH_LONG).show();
-
+                changeToHomePage();
             }
         });
+        Toast.makeText(getApplicationContext() ,"please wait we are loging in",Toast.LENGTH_LONG).show();
 
 
     }

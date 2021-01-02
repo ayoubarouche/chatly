@@ -39,7 +39,7 @@ public class TeacherCoursController implements CoursController {
         this.teacher = teacher ;
     }
     @Override
-    public List<Cour> getCourses() {
+    public List<Cour> getCourses(final OnGettingCourses onGettingCourses) {
           courses = new ArrayList<>();
         db.collection("cours").whereEqualTo("teacher",teacher.getIdUser())
                 .get()
@@ -47,12 +47,15 @@ public class TeacherCoursController implements CoursController {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            List<Cour> courses1 = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 CourFirebase firebasecour = document.toObject(CourFirebase.class);
                                 Cour cour = firebasecour.OriginalCours();
                                 cour.setIdCour(document.getId());
-                                courses.add(cour);
+                                courses1.add(cour);
+
                             }
+                            onGettingCourses.OnCallBack(courses1);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -95,14 +98,14 @@ public class TeacherCoursController implements CoursController {
         return null;
     }
 
-    public Cour addCour(Cour cour){
-        CourFirebase courFirebase = new CourFirebase(cour);
+    public Cour addCour(final Cour cour, final OnCourAdded onCourAdded){
+        final CourFirebase courFirebase = new CourFirebase(cour);
        final DocumentReference documentReference =  db.collection("cours").document();
                     courFirebase.setIdCour(documentReference.getId());
     documentReference.set(courFirebase).addOnSuccessListener(new OnSuccessListener<Void>() {
            @Override
            public void onSuccess(Void aVoid) {
-
+                onCourAdded.onCallBack(courFirebase.OriginalCours());
                Log.d(TAG , "ajouter avec succes ");
 
            }
@@ -113,7 +116,7 @@ public class TeacherCoursController implements CoursController {
            }
        });
         Log.d(TAG, "addCour: the id is : "+documentReference.getId());
-        courFirebase.setIdCour(documentReference.getId() );
+  //      courFirebase.setIdCour(documentReference.getId() );
     return  courFirebase.OriginalCours();
     }
     public void deleteCour(Cour cour){
@@ -129,5 +132,11 @@ public class TeacherCoursController implements CoursController {
                 Log.d(TAG, "onFailure: failed to delete");
             }
         });
+    }
+    public interface OnGettingCourses{
+       public void OnCallBack(List<Cour> courses);
+    }
+    public interface OnCourAdded{
+        public void onCallBack(Cour cour);
     }
 }
