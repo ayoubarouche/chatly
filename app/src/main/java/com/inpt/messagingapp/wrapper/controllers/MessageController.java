@@ -32,8 +32,8 @@ public class MessageController {
         this.cour = cour;
     }
 
-    public MessageController(Cour cour) {
-        db = FirebaseFirestore.getInstance();
+    public MessageController(FirebaseFirestore firebase_database, Cour cour) {
+        db = firebase_database;
         documentReference = db.collection("cours").document(cour.getIdCour());
         this.cour = cour;
     }

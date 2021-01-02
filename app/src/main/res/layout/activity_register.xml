@@ -71,12 +71,12 @@
 
 
     <EditText
-        android:id="@+id/username_box"
+        android:id="@+id/nom_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="40dp"
-        android:hint="@string/username_box"
+        android:hint= "@string/nom_box"
         android:textColorHighlight="@color/colorPrimary"
         android:drawablePadding="25dp"
         android:drawableTint="#B8B8B8"
@@ -91,6 +91,25 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_register" />
+  <EditText
+        android:id="@+id/prenom_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/edittext_background"
+        android:drawableLeft="@drawable/username_icon"
+        android:drawablePadding="25dp"
+        android:drawableTint="#B8B8B8"
+        android:hint="@string/prenom_box"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_box" />
 
     <EditText
         android:id="@+id/email_box"
@@ -112,7 +131,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_box" />
+        app:layout_constraintTop_toBottomOf="@+id/prenom_box" />
+
     <EditText
         android:id="@+id/password_box"
         android:layout_width="match_parent"
@@ -132,26 +152,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_box" />
-
-    <EditText
-        android:id="@+id/check_password_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="35dp"
-        android:background="@drawable/edittext_background"
-        android:drawableLeft="@drawable/password_icon"
-        android:drawablePadding="25dp"
-        android:drawableTint="#B8B8B8"
-        android:hint="@string/password_check_box"
-        android:inputType="textPassword"
-        android:padding="12dp"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_box" />
     <LinearLayout
         android:id="@+id/type"
         android:layout_marginStart="35dp"
@@ -163,11 +163,12 @@
         android:layout_marginLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/check_password_box"
+        app:layout_constraintTop_toBottomOf="@+id/password_box"
         >
 
 
         <RadioGroup
+            android:id="@+id/user_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

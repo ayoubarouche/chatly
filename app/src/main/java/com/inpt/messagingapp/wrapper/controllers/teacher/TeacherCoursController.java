@@ -34,9 +34,9 @@ public class TeacherCoursController implements CoursController {
 
    static private FirebaseFirestore db;
     static String TAG  = "hello world";
-    public TeacherCoursController(){
-        db= FirebaseFirestore.getInstance();
-
+    public TeacherCoursController(FirebaseFirestore firebase_database,User teacher){
+        db= firebase_database;
+        this.teacher = teacher ;
     }
     @Override
     public List<Cour> getCourses() {

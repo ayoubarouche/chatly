@@ -41,10 +41,10 @@ public class DevoirController {
         this.cour = cour;
     }
 
-    public DevoirController(Cour cour) {
+    public DevoirController(FirebaseFirestore firebase_database ,Cour cour) {
 
         this.cour = cour;
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore = firebase_database;
         documentReference = firebaseFirestore.collection("cours").document(cour.getIdCour());
     }
     public Devoir addDevoir( Devoir devoir){

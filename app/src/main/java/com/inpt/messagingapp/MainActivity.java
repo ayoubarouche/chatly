@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 User user = new User("hello@gmail.com",UserType.teacher,"testindid","ayoub","arouche","ayoubarouche");
-     signup(user);
+     //signup(user);
 
 
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 public void makeToast(String message){
         Toast.makeText(this,message,Toast.LENGTH_LONG);
 }
-public void signup(User user){
+ /*public void signup(User user){
     UserController ucontroller = new UserController();
     ucontroller.login(user.getEmail() , "helloworld");
     User user2 = ucontroller.getUser();
@@ -71,5 +71,5 @@ public void signup(User user){
     }else {
         System.out.println("user is null");
     }
-    }
+    }*/
 }

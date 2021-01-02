@@ -63,10 +63,9 @@ return courses;
         this.student = student;
     }
 
-    public StudentCoursController(User student) {
+    public StudentCoursController(FirebaseFirestore firebase_database , User student) {
         this.student = student;
         db = FirebaseFirestore.getInstance();
-
     }
     public void inscritCour(String IdCour){
        db.collection("cours")

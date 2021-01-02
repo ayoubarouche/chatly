@@ -21,9 +21,9 @@ public class UserController {
     FirebaseAuth auth;
     private User user ;
     private User tempuser; // temporaire utilisateur pour la consultation des utilisateurs
-    public UserController(){
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();;
+    public UserController(FirebaseFirestore firebasedatabase , FirebaseAuth authentification){
+        db = firebasedatabase;
+        auth = authentification;
     }
 
     public User getUser() {
@@ -42,10 +42,11 @@ public class UserController {
         this.tempuser = tempuser;
     }
 
-    public void addUser(User user){
+    public void addUser(final User user, final AfterGettingUser afterGettingUser){
         db.collection("users").document(user.getIdUser()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                afterGettingUser.OnCallBack(user);
                 Log.d("user controller", "onSuccess: add is succes");
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -55,27 +56,27 @@ public class UserController {
             }
         });
     }
-    public void login(String email , String password){
+    public void login(String email , String password, final AfterGettingUser afterGettingUser){
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     if(firebaseUser!=null){
-                       User user1 =  fromFireBaseUserToNormalUser(firebaseUser);
-                      if(user1!=null) {
-                          Log.d("the user is", "onComplete: the user is"+user1.getName()+" "+user1.getIdUser());
+
+
+                        fromFireBaseUserToNormalUser(firebaseUser,afterGettingUser);
+                       //   Log.d("login", "onComplete: the user is"+user1.getName()+" "+user1.getIdUser());
                           setUser(user);
                       }
-
-                    }
-                    else Log.d("erruer getting the user", "onComplete: ");
                 }
+                else Log.d("login", "onComplete: failed to get the user");
             }
         });
 
     }
-    public void signup(final User user_to_sign_up, String password){
+    public boolean signup(final User user_to_sign_up, String password, final AfterGettingUser afterGettingUser){
         auth.createUserWithEmailAndPassword(user_to_sign_up.getEmail(),password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -84,7 +85,7 @@ public class UserController {
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                         if(firebaseUser!=null){
                            User us =  fromFireBaseUserToNormalUser(firebaseUser,user_to_sign_up);
-                        addUser(us);
+                        addUser(us,afterGettingUser);
                             setUser(us);
                         }
                         else Log.d("the user is null", "onComplete: ");
@@ -95,7 +96,7 @@ public class UserController {
                 }
             }
         });
-
+return true;
     }
     private User getUser(String userid){
 
@@ -113,6 +114,24 @@ public class UserController {
         });
         return tempuser ;
     }
+    private User getUser(String userid, final AfterGettingUser afterGettingUser){
+
+        db.collection("users").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                setTempuser(documentSnapshot.toObject(User.class));
+                afterGettingUser.OnCallBack(documentSnapshot.toObject(User.class));
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("usercontroller", "onFailure: it not finded");
+            }
+        });
+        return tempuser ;
+    }
+
     public User getCurrentUser(){
         return null ;
     }
@@ -125,12 +144,12 @@ public class UserController {
         user.setName(user1.getName());
         user.setPrenom(user1.getPrenom());
         user.setType(user1.getType());
-
+        user.setUsername(user1.getUsername());
         return user ;
     }
-    public User fromFireBaseUserToNormalUser( FirebaseUser firebaseUser){
+    public User fromFireBaseUserToNormalUser( FirebaseUser firebaseUser, AfterGettingUser afterGettingUser){
         String uid = firebaseUser.getUid();
-        User user1 = getUser(uid);
+        User user1 = getUser(uid,afterGettingUser);
         if(user1!=null){
            user = new User();
             user.setIdUser(uid);
@@ -143,5 +162,10 @@ public class UserController {
         return null ;
 
     }
-
+    public interface AfterGettingFireBaseUser{
+        void OnCallBack(FirebaseUser user);
+    }
+    public interface AfterGettingUser{
+        void OnCallBack(User user);
+    }
 }
