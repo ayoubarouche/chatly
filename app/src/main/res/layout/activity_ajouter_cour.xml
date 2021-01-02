@@ -125,10 +125,9 @@
         android:layout_width="36dp"
         android:layout_height="37dp"
         android:layout_marginEnd="24dp"
-        android:onClick="FileUpload"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/addfile"
         app:layout_constraintEnd_toEndOf="@+id/addfile"
         app:layout_constraintTop_toTopOf="@+id/addfile"
-        app:srcCompat="@drawable/ic_add_dev"
-        tools:ignore="OnClick" />
+        app:srcCompat="@drawable/ic_add_dev" />
 </androidx.constraintlayout.widget.ConstraintLayout>

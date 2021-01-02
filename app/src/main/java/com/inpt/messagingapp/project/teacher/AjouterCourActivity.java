@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ public class AjouterCourActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     EditText title_input, description_input, file_input;
     Button add_button, cancel_button;
+    ImageView upFile;
     Cour new_cour;
     GlobalApplication app;
     @Override
@@ -46,6 +48,7 @@ public class AjouterCourActivity extends AppCompatActivity {
         file_input = findViewById(R.id.addfile);
         add_button = findViewById(R.id.ajouter);
         cancel_button = findViewById(R.id.cancel);
+        upFile = findViewById(R.id.imageView2);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserOne");
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +64,13 @@ public class AjouterCourActivity extends AppCompatActivity {
 
             }
         });
-    }
-    public void FileUpload(View view) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        startActivityForResult(intent,PICK_FILE);
+        upFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(intent,PICK_FILE);
+            }});
     }
     public void addCour(Cour new_cour1){
         app.setTeacherCoursController();
