@@ -129,5 +129,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/addfile"
         app:layout_constraintEnd_toEndOf="@+id/addfile"
         app:layout_constraintTop_toTopOf="@+id/addfile"
-        app:srcCompat="@drawable/ic_add_dev" />
+        app:srcCompat="@drawable/ic_add_dev"
+        tools:ignore="OnClick" />
 </androidx.constraintlayout.widget.ConstraintLayout>
