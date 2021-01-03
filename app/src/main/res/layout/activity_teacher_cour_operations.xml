@@ -82,7 +82,7 @@
                 <TextView
                     android:layout_width="233dp"
                     android:layout_height="wrap_content"
-                    android:text="Ajouter Cours"
+                    android:text="Partager Code Cours"
                     android:textColor="@color/colorBlack"
                     android:textSize="26sp" />
             </LinearLayout>
