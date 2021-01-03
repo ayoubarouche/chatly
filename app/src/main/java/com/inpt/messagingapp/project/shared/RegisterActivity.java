@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = this.email_box.getText().toString();
         String prenom = this.prenom_box.getText().toString();
         String username = nom+"_"+prenom;
-        UserType us_type = UserType.valueOf(type.getText().toString());
+        UserType us_type =UserType.valueOf((String) type.getText());
         User user = new User();
         user.setType(us_type);
         user.setUsername(username);
@@ -136,7 +136,6 @@ public class RegisterActivity extends AppCompatActivity {
            @Override
            public void OnCallBack(User user) {
                app.setUser(user);
-               app.getLocaldatabase().addLocale(user);
                loading_dialog.dismissdialog();
                changeToHomePage();
            }

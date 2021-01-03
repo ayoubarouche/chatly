@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:buttonTint="@color/colorSmalt"
-                android:text="Professeur"
+                android:text="teacher"
                 android:textSize="9pt" />
 
             <RadioButton
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:buttonTint="@color/colorSmalt"
-                android:text="Etudiant"
+                android:text="student"
                 android:textSize="9pt" />
         </RadioGroup>
     </LinearLayout>
