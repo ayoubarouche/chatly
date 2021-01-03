@@ -57,6 +57,7 @@ public class TeacherCoursController implements CoursController {
                             }
                             onGettingCourses.OnCallBack(courses1);
                         } else {
+                            onGettingCourses.OnErreur();
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
@@ -72,6 +73,11 @@ public class TeacherCoursController implements CoursController {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 tempcour = (CourFirebase) documentSnapshot.toObject(CourFirebase.class);
                     onGetCourFinished.OnCallBack(tempcour.OriginalCours());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onGetCourFinished.OnErreur();
             }
         });
         return tempcour.OriginalCours();
@@ -89,12 +95,7 @@ public class TeacherCoursController implements CoursController {
     public TeacherCoursController(User teacher) {
         this.teacher = teacher;
     }
-    public String courId(){
-        return null;
-    }
-    public List<User> getCourStudents(){
-        return null;
-    }
+
 
     public Cour addCour(final Cour cour, final OnCourAdded onCourAdded){
         final CourFirebase courFirebase = new CourFirebase(cour);
@@ -110,7 +111,7 @@ public class TeacherCoursController implements CoursController {
        }).addOnFailureListener(new OnFailureListener() {
            @Override
            public void onFailure(@NonNull Exception e) {
-               Log.e(TAG,"failed to add the document");
+              onCourAdded.OnErreur();
            }
        });
         Log.d(TAG, "addCour: the id is : "+documentReference.getId());
@@ -127,20 +128,24 @@ public class TeacherCoursController implements CoursController {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "onFailure: failed to delete");
+                onCourDeleted.OnErreur();
             }
         });
     }
     public interface OnGettingCourses{
-       public void OnCallBack(List<Cour> courses);
+        void OnCallBack(List<Cour> courses);
+        void OnErreur();
     }
     public interface OnCourAdded{
         public void onCallBack(Cour cour);
+        void OnErreur();
     }
     public interface OnCourDeleted{
         public void OnCallBack();
+        void OnErreur();
     }
     public interface OnGetCourFinished{
         public void OnCallBack(Cour cour);
+        void OnErreur();
     }
 }

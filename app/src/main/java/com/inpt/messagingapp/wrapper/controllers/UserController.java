@@ -71,7 +71,7 @@ public class UserController {
                           setUser(user);
                       }
                 }
-                else Log.d("login", "onComplete: failed to get the user");
+                else afterGettingUser.OnErreur();
             }
         });
 
@@ -132,9 +132,7 @@ return true;
         return tempuser ;
     }
 
-    public User getCurrentUser(){
-        return null ;
-    }
+
     public User fromFireBaseUserToNormalUser( FirebaseUser firebaseUser,User user1){
         String uid = firebaseUser.getUid();
         String email = firebaseUser.getEmail();
@@ -162,10 +160,9 @@ return true;
         return null ;
 
     }
-    public interface AfterGettingFireBaseUser{
-        void OnCallBack(FirebaseUser user);
-    }
+
     public interface AfterGettingUser{
         void OnCallBack(User user);
+        void OnErreur();
     }
 }

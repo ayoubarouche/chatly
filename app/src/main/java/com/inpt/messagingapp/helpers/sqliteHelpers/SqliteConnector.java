@@ -15,6 +15,9 @@ import com.inpt.messagingapp.wrapper.models.User;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SqliteConnector extends SQLiteOpenHelper implements ControllerLocale {
     private Context context;
     private static final String DATABASE_LOCALE_NAME = "BD_LOCALE";
@@ -153,14 +156,30 @@ public class SqliteConnector extends SQLiteOpenHelper implements ControllerLocal
     }
 
     @Override
-    public Cursor allCourL() {
+    public List<Cour> allCourL() {
         String sql = "select * from " + TABLE_COURS_LOCALE_NAME;
         SQLiteDatabase DATABASE_LOCALE_NAME = this.getWritableDatabase();
         Cursor cursor = null;
         if (DATABASE_LOCALE_NAME != null) {
             cursor = DATABASE_LOCALE_NAME.rawQuery(sql, null);
         }
-        return cursor;
+        List<Cour> cours = new ArrayList<>();
+      if (cursor.moveToFirst()) {
+            do {
+                Cour cour = new Cour();
+                cour.setIdCour(cursor.getString(0));
+                cour.setTeacher(cursor.getString(1));
+                cour.setDescription(cursor.getString(2));
+                cour.setTitre(cursor.getString(3));
+                cour.setStudents(null);
+                cour.setFile(cursor.getString(4));
+                cour.setDevoirs(null);
+                // Adding contact to list
+                cours.add(cour);
+            } while (cursor.moveToNext());
+        }
+
+        return cours;
     }
 
     @Override
@@ -300,4 +319,7 @@ public class SqliteConnector extends SQLiteOpenHelper implements ControllerLocal
             Toast.makeText(context, "successfully updated", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
+

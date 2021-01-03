@@ -7,12 +7,14 @@ import com.inpt.messagingapp.wrapper.models.Devoir;
 import com.inpt.messagingapp.wrapper.models.Reponse;
 import com.inpt.messagingapp.wrapper.models.User;
 
+import java.util.List;
+
 public interface ControllerLocale {
     public void addLocale(Cour cour);
     public void addLocale(User user);
     public void addLocale(Devoir devoir);
     public void addLocale(Reponse reponse);
-    public Cursor allCourL();
+    public List<Cour> allCourL();
     public Cursor allDevoirL();
     public Cursor allUserL();
     public Cursor allReponse();

@@ -1,7 +1,5 @@
 package com.inpt.messagingapp.project.teacher;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,33 +16,37 @@ import androidx.cardview.widget.CardView;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.helpers.sqliteHelpers.SqliteConnector;
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.shared.ChatActivity;
 import com.inpt.messagingapp.project.shared.CoursActivity;
-import com.inpt.messagingapp.project.shared.DevoirsActivity;
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
-import com.inpt.messagingapp.wrapper.models.UserType;
 
 public class TeacherCourOperationsActivity extends AppCompatActivity {
     TextView title;
     CardView cardchat;
     CardView cardshare;
     CardView carddelete;
+    CardView carddow;
     GlobalApplication app ;
     String id_cour ;
     Intent i;
     Cour public_cour ;
+    loadingDialog loading_dialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         id_cour = intent.getStringExtra("id_cour");
         setContentView(R.layout.activity_teacher_cour_operations);
+        loading_dialog = new loadingDialog(this);
+
         app = (GlobalApplication)getApplication();
         initialisingTheCour(id_cour);
             cardchat = findViewById(R.id.cardchat);
         cardshare = findViewById(R.id.cardshare);
         carddelete = findViewById(R.id.carddelete);
+        carddow =findViewById(R.id.cardDev);
         title = findViewById(R.id.textview);
         cardshare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +66,13 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
             }
         });
 
-
+        carddow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                app.setFilesController();
+                app.getFilesController().downloadFile(getApplicationContext(),id_cour,".pdf",public_cour.getFile());
+            }
+        });
         carddelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,24 +88,8 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                SqliteConnector myDB = new SqliteConnector(TeacherCourOperationsActivity.this);
-             //   myDB.deleteCourL(null);
-                Cour cour = new Cour();
-                cour.setIdCour(id_cour);
-               app.getTeacherCoursController().deleteCour(cour, new TeacherCoursController.OnCourDeleted() {
-                   @Override
-                   public void OnCallBack() {
-                       Toast.makeText(getApplicationContext(),"cour is deleted",Toast.LENGTH_SHORT).show();
-                       Intent intent = new Intent(getApplicationContext(), CoursActivity.class);
-                       intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                       startActivity(intent);
-
-                   }
-               });
-                Toast.makeText(getApplicationContext(),"deleting the cour",Toast.LENGTH_SHORT).show();
-
-            }
-        });
+                supprimerCour();
+        }});
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -116,7 +108,17 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
             android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
             clipboard.setPrimaryClip(clip);
         }
+
         Toast.makeText(getApplicationContext() , "text copied" ,Toast.LENGTH_SHORT).show();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "hi these is the id of the course to use : "+text);
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+
+
     }
     public void initialisingTheCour(String cour_id){
 
@@ -125,13 +127,60 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
          app.teacherCoursController.getCour(cour_id, new TeacherCoursController.OnGetCourFinished() {
            @Override
            public void OnCallBack(Cour cour) {
+               loading_dialog.dismissdialog();
                public_cour = cour ;
                Toast.makeText(getApplicationContext(), "cours infor received successifly..." ,Toast.LENGTH_SHORT).show();
                 title.setText(cour.getTitre());
            }
-       });
-         Toast.makeText(getApplicationContext(), "getting the cours informations..." ,Toast.LENGTH_SHORT).show();
 
+             @Override
+             public void OnErreur() {
+               loading_dialog.dismissdialog();
+               erreurDialog();
+             }
+         });
+loading_dialog.startLoadingDialog("chargement du cour....");
 
     }
+    public void supprimerCour(){
+       final SqliteConnector myDB = new SqliteConnector(TeacherCourOperationsActivity.this);
+        //   myDB.deleteCourL(null);
+        Cour cour = new Cour();
+        cour.setIdCour(id_cour);
+        app.getTeacherCoursController().deleteCour(cour, new TeacherCoursController.OnCourDeleted() {
+            @Override
+            public void OnCallBack() {
+
+                myDB.deleteCourL(id_cour);
+
+                loading_dialog.dismissdialog();
+
+                Toast.makeText(getApplicationContext(),"cour is deleted",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), CoursActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+
+            @Override
+            public void OnErreur() {
+                    loading_dialog.dismissdialog();
+                erreurDialog();
+            }
+        });
+        loading_dialog.startLoadingDialog("suppresion du cour ...");
+    }
+    void erreurDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erreur");
+        builder.setMessage(" problème de la connextion !  :");
+        builder.setPositiveButton("d'accord", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.create().show();
+    }
+
 }

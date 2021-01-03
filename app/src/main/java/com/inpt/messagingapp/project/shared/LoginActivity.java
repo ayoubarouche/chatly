@@ -1,6 +1,7 @@
 package com.inpt.messagingapp.project.shared;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.inpt.messagingapp.GlobalApplication;
-import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.wrapper.controllers.UserController;
@@ -96,14 +97,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void OnCallBack(User user) {
                 app.setUser(user);
+                app.getLocaldatabase().addLocale(user);
                 User user2 = app.getUser();
                // Toast.makeText(getApplicationContext() , "the user is : "+user2.getPrenom(),Toast.LENGTH_LONG).show();
                 loading_dialog.dismissdialog();
                 changeToHomePage();
             }
+
+            @Override
+            public void OnErreur() {
+                loading_dialog.dismissdialog();
+                confirmDialog();
+            }
         });
         Toast.makeText(getApplicationContext() ,"please wait we are loging in",Toast.LENGTH_LONG).show();
-        loading_dialog.startLoadingDialog("attender on'est entrain de se connecter");
+        loading_dialog.startLoadingDialog("connexion en cours ...");
 
 
     }
@@ -111,5 +119,17 @@ public class LoginActivity extends AppCompatActivity {
     public void show_the_erreur() {
         Toast.makeText(this ,erreur , Toast.LENGTH_LONG).show();
     }
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erreur");
+        builder.setMessage("probleme de l'authentification ! ");
+        builder.setPositiveButton("d'accord", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+
+        builder.create().show();
+    }
 }

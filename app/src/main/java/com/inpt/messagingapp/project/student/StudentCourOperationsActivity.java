@@ -10,9 +10,10 @@ import android.widget.Toast;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.helpers.sqliteHelpers.SqliteConnector;
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.shared.ChatActivity;
 import com.inpt.messagingapp.project.shared.CoursActivity;
-import com.inpt.messagingapp.project.shared.DevoirsActivity;
+import com.inpt.messagingapp.wrapper.controllers.student.StudentCoursController;
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
 
@@ -26,6 +27,8 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
     CardView cardchat;
     CardView cardshare;
     CardView carddelete;
+    CardView carddow;
+    loadingDialog loading_dialog;
     String id_cour;
     Cour public_cour ;
     Intent i ;
@@ -35,6 +38,7 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_cour_operations);
         cardchat = findViewById(R.id.cardchat);
+        carddow = findViewById(R.id.cardDev);
         Intent intent = getIntent();
         id_cour = intent.getStringExtra("id_cour");
         app = (GlobalApplication)getApplication();
@@ -54,7 +58,14 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        carddow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"downloading the file",Toast.LENGTH_SHORT).show();
+                app.setFilesController();
+                app.getFilesController().downloadFile(getApplicationContext(),"ayoub",".pdf",public_cour.getFile());
+            }
+        });
 
         carddelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,19 +78,33 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
 
     }
     void confirmDialog(){
+        loading_dialog = new loadingDialog(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + title.getText().toString().trim() + " ?");
-        builder.setMessage("Are you sure you want to delete " + title + " ?");
+        builder.setTitle("QUESTION ");
+        builder.setMessage("TU VEUX SUPPRIMER LE COUR ?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                SqliteConnector myDB = new SqliteConnector(StudentCourOperationsActivity.this);
-                myDB.deleteCourL(null);
-                Toast.makeText(getApplicationContext(),"cour is deleted",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), CoursActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
+                app.getStudentCoursController().quiterCour(id_cour, new StudentCoursController.OnAfterRegisterInCour() {
+                    @Override
+                    public void OnCallBack() {
+                        SqliteConnector myDB = new SqliteConnector(StudentCourOperationsActivity.this);
+                        myDB.deleteCourL(id_cour);
+                        loading_dialog.dismissdialog();
+                        Toast.makeText(getApplicationContext(),"cour ",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), CoursActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);
 
+                    }
+
+                    @Override
+                    public void OnErreur() {
+                       loading_dialog.dismissdialog();
+                        erreurDialog();
+                    }
+                });
+loading_dialog.startLoadingDialog("suppression du cour....");
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -93,20 +118,39 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
 
     }
     public void initialisingTheCour(String cour_id){
-
+        loading_dialog = new loadingDialog(this);
         app.setTeacherCoursController();
 
         app.teacherCoursController.getCour(cour_id, new TeacherCoursController.OnGetCourFinished() {
             @Override
             public void OnCallBack(Cour cour) {
                 public_cour = cour ;
-                Toast.makeText(getApplicationContext(), "cours infor received successifly..." ,Toast.LENGTH_SHORT).show();
                 title.setText(cour.getTitre());
+            loading_dialog.dismissdialog();
+            }
+
+            @Override
+            public void OnErreur() {
+                loading_dialog.dismissdialog();
+                erreurDialog();
             }
         });
-        Toast.makeText(getApplicationContext(), "getting the cours informations..." ,Toast.LENGTH_SHORT).show();
-
+        loading_dialog.startLoadingDialog("recherche du cours ...");
 
 
     }
+    void erreurDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erreur");
+        builder.setMessage(" problème de la connextion !  :");
+        builder.setPositiveButton("d'accord", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.create().show();
     }
+
+}

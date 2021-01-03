@@ -1,22 +1,20 @@
 package com.inpt.messagingapp.project.student;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.inpt.messagingapp.GlobalApplication;
-import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.loadingDialog;
+import com.inpt.messagingapp.project.shared.CoursActivity;
 import com.inpt.messagingapp.wrapper.controllers.NotificationController;
 import com.inpt.messagingapp.wrapper.controllers.student.StudentCoursController;
 
@@ -24,10 +22,12 @@ public class AjouterCourStudent extends AppCompatActivity {
     EditText code_cour;
     Button ajouter_cour_button;
     GlobalApplication application ;
+    loadingDialog loading_dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         application = (GlobalApplication)getApplication();
+        loading_dialog = new loadingDialog(this);
 
         setContentView(R.layout.activity_ajouter_cour_student);
         initialiseElements();
@@ -44,7 +44,6 @@ public void initialiseElements(){
     ajouter_cour_button = findViewById(R.id.ajouter_cour_button);
 }
     public void inscritCour(final String courId){
-        final loadingDialog loading_dialog = new loadingDialog(this);
         application.setStudentCoursController();
        application.setNotificationController();
         application.getStudentCoursController().inscritCour(courId, new StudentCoursController.OnAfterRegisterInCour() {
@@ -54,20 +53,40 @@ public void initialiseElements(){
                     @Override
                     public void OnCallBack() {
                         Toast.makeText(getApplicationContext(),"you will receive notifications",Toast.LENGTH_SHORT).show();
+                    loading_dialog.dismissdialog();
+                    Intent intent = new Intent(getApplicationContext(), CoursActivity.class);
+                    startActivity(intent);
                     }
 
                     @Override
                     public void OnFailed() {
-                        Toast.makeText(getApplicationContext(),"you can'receive notifications",Toast.LENGTH_SHORT).show();
-
+                        loading_dialog.dismissdialog();
+                        confirmDialog();
                     }
                 });
-                Toast.makeText(getApplicationContext(),"looking if you can receive notifications...",Toast.LENGTH_SHORT).show();
 
+            }
+
+            @Override
+            public void OnErreur() {
                 loading_dialog.dismissdialog();
+                confirmDialog();
             }
         });
+
         loading_dialog.startLoadingDialog("attendez s'ils vous plait ...");
     }
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erreur");
+        builder.setMessage(" problème de la connextion !  :");
+        builder.setPositiveButton("d'accord", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+
+        builder.create().show();
+    }
 }

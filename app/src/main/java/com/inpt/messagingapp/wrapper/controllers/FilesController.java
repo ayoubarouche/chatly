@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +35,17 @@ public class FilesController {
                     public void onSuccess(Uri uri) {
                         onAfterUploading.OnCallBack(String.valueOf(uri));
                         }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        onAfterUploading.OnErreur();
+                    }
                 });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onAfterUploading.OnErreur();
             }
         });
 
@@ -51,5 +64,6 @@ public class FilesController {
     }
     public interface OnAfterUploading{
         public void OnCallBack(String file_url);
+        void OnErreur();
     }
 }

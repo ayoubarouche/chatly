@@ -1,6 +1,7 @@
 package com.inpt.messagingapp.project.teacher;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +28,7 @@ import com.google.firebase.storage.UploadTask;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.helpers.sqliteHelpers.SqliteConnector;
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.shared.CoursActivity;
 import com.inpt.messagingapp.wrapper.controllers.FilesController;
 import com.inpt.messagingapp.wrapper.controllers.NotificationController;
@@ -50,6 +53,7 @@ public class AjouterCourActivity extends AppCompatActivity {
     Uri uri;
     Cour new_cour;
     GlobalApplication app;
+    loadingDialog loading_dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -90,27 +94,35 @@ public class AjouterCourActivity extends AppCompatActivity {
             @Override
             public void onCallBack(Cour cour) {
                 new_cour = cour;
+                app.getLocaldatabase().addLocale(cour);
                 app.getNotificationController().registerToTopic(cour.getIdCour(), new NotificationController.OnTopicSubscribed() {
                     @Override
                     public void OnCallBack() {
-                        Toast.makeText(getApplicationContext(),"you will receive the notifications",Toast.LENGTH_SHORT).show();
+                        loading_dialog.dismissdialog();
+                        goToCours();
                     }
 
                     @Override
                     public void OnFailed() {
-
+                loading_dialog.dismissdialog();
+                confirmDialog();
                     }
                 });
-                /*SqliteConnector myDB = new SqliteConnector(AjouterCourActivity.this);
-                myDB.addLocale(new_cour);
-                */
+                loading_dialog.dismissdialog();
                 Toast.makeText(getApplicationContext() ,"the cour is added cour_id is : "+cour.getIdCour(),Toast.LENGTH_LONG).show();
 
                 goToCours();
             }
-        });
-        Toast.makeText(getApplicationContext() ,"we are adding the cours",Toast.LENGTH_LONG).show();
 
+            @Override
+            public void OnErreur() {
+                loading_dialog.dismissdialog();
+                confirmDialog();
+            }
+        });
+        Toast.makeText(getApplicationContext() ,"we are adding the cours",Toast.LENGTH_SHORT).show();
+        loading_dialog.dismissdialog();
+        loading_dialog.startLoadingDialog("enregistrement du cour ....");
     }
     public void goToCours(){
         Intent intent = new Intent(this, CoursActivity.class);
@@ -184,6 +196,7 @@ public class AjouterCourActivity extends AppCompatActivity {
         return fileName;
     }
         public void AddCour(){
+        loading_dialog = new loadingDialog(this);
             app.setFilesController();
             app.getFilesController().addToStorage(uri, "courses", new FilesController.OnAfterUploading() {
                 @Override
@@ -193,9 +206,27 @@ public class AjouterCourActivity extends AppCompatActivity {
 
                     addCour(new_cour);
                 }
+
+                @Override
+                public void OnErreur() {
+                    loading_dialog.dismissdialog();
+                    confirmDialog();
+                }
             });
-            Toast.makeText(getApplicationContext(),"uploading file...",Toast.LENGTH_LONG).show();
+            loading_dialog.startLoadingDialog(getString(R.string.msg_ajouter_cours));
 
         }
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erreur");
+        builder.setMessage(" problème de la connextion !  :");
+        builder.setPositiveButton("d'accord", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+
+        builder.create().show();
+    }
 }

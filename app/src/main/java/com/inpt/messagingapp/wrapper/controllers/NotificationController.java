@@ -1,23 +1,17 @@
 package com.inpt.messagingapp.wrapper.controllers;
 
-import android.app.Notification;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.helpers.MySingleton;
 import com.inpt.messagingapp.wrapper.models.Message;
 import com.google.firebase.messaging.RemoteMessage;

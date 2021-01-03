@@ -54,7 +54,7 @@ public class GlobalFireBaseMessagingService extends FirebaseMessagingService {
         String channelId = "helloworld";
         Uri defaultSoundUri  = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_smart)
-                .setContentTitle("testing").setContentText(notification)
+                .setContentTitle("SMARTINPT").setContentText(notification+" envoyé un message .")
                 .setAutoCancel(true).setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
@@ -88,10 +88,10 @@ public class GlobalFireBaseMessagingService extends FirebaseMessagingService {
     private synchronized String createChannel() {
         NotificationManager mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        String name = "snap map fake location ";
+        String name = "looking for messages";
         int importance = NotificationManager.IMPORTANCE_LOW;
 
-        NotificationChannel mChannel = new NotificationChannel("snap map channel", name, importance);
+        NotificationChannel mChannel = new NotificationChannel("looking for messages", name, importance);
 
         mChannel.enableLights(true);
         mChannel.setLightColor(Color.BLUE);
@@ -100,6 +100,6 @@ public class GlobalFireBaseMessagingService extends FirebaseMessagingService {
         } else {
             stopSelf();
         }
-        return "snap map channel";
+        return "looking for messages";
     }
 }

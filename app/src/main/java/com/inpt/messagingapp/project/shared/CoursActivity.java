@@ -1,27 +1,22 @@
 package com.inpt.messagingapp.project.shared;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.teacher.AjouterCourActivity;
 import com.inpt.messagingapp.GlobalApplication;
-import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.adapters.CoursViewAdapter;
 import com.inpt.messagingapp.project.student.AjouterCourStudent;
@@ -32,22 +27,22 @@ import com.inpt.messagingapp.wrapper.models.UserType;
 import java.util.List;
 
 public class CoursActivity extends AppCompatActivity {
-    private static final String TAG = "ConsulterCoursTeacher";
+    private static final String TAG = "consulterCoursTeacher";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private GlobalApplication app ;
     private List<Cour> cours;
     private loadingDialog loading_dialog ;
     private Toolbar toolbar;
-    private ImageView imageView ;
+    private ImageView signout ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app.authentification = FirebaseAuth.getInstance();
+
         setContentView(R.layout.consulter_cours_teacher);
         Button ajouter = findViewById(R.id.ajouter_button);
-        imageView = findViewById(R.id.imageView4);
-        registerForContextMenu(imageView);
+        signout = findViewById(R.id.signout);
+
         app = (GlobalApplication)getApplication();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -59,8 +54,15 @@ public class CoursActivity extends AppCompatActivity {
                 changeToAddCourPage();
             }
         });
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exitDialog();
+            }
+        });
         if(app.getUser().getType() == UserType.teacher)getCoursesTeacher();
         else getCoursesStudent();
+
     }
     public void changeToAddCourPage(){
         Intent intent ;
@@ -74,6 +76,7 @@ public class CoursActivity extends AppCompatActivity {
         }
         startActivity(intent);
     }
+
     public void getCoursesTeacher(){
         loading_dialog = new loadingDialog(this);
         if(app.getTeacherCoursController()==null)app.setTeacherCoursController();
@@ -86,28 +89,17 @@ public class CoursActivity extends AppCompatActivity {
                 loading_dialog.dismissdialog();
 
             }
+
+            @Override
+            public void OnErreur() {
+                loading_dialog.dismissdialog();
+                confirmDialog();
+            }
         });
         loading_dialog.startLoadingDialog("chargement de votre cours ....");
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==R.id.logout){
-                Intent intent = new Intent(CoursActivity.this, LoginActivity.class);
-                app.authentification.signOut();
-                startActivity(intent);
-                return true;
-        }
-        return super.onContextItemSelected(item);
-    }
 
     public void getCoursesStudent(){
         loading_dialog = new loadingDialog(this);
@@ -122,8 +114,52 @@ public class CoursActivity extends AppCompatActivity {
 
             }
 
+            @Override
+            public void OnErreur() {
+                loading_dialog.dismissdialog();
+                confirmDialog();
+            }
+
         });
         loading_dialog.startLoadingDialog("rechargement de votre cours ....");
     }
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Erreur");
+        builder.setMessage(" problème de la connextion !  :");
+        builder.setPositiveButton("d'accord", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+
+        builder.create().show();
+    }
+    void exitDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("QUESTION " );
+        builder.setMessage("VOUS VOULEZ VRAIMENT SE DÉCONNECTER ?");
+        builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                app.authentification.signOut();
+                app.setUser(null);
+                Intent intent = new Intent(CoursActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+
+
+    }
 }

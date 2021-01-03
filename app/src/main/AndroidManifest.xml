@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inpt.messagingapp">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
@@ -11,21 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".GlobalFireBaseMessagingService"
-            android:exported="false"
-            android:directBootAware="true">
+        <service
+            android:name=".GlobalFireBaseMessagingService"
+            android:directBootAware="true"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
 
         </service>
-        <activity android:name=".AjouterDevActivity" />
-        <activity android:name=".AjouterCourActivity" />
-        <activity android:name=".MainActivity52" />
-        <activity android:name=".MainActivity51" />
-        <activity android:name=".MainActivity4" />
-        <activity android:name=".MainActivity3" />
-        <activity android:name=".MainActivity" />
+
         <activity android:name=".project.shared.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,27 +34,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".project.shared.RegisterActivity" />
-        <activity android:name=".wrapper.views.teacher.ConsulterCoursTeacher" />
         <activity android:name=".project.WelcomeActivity" />
         <activity android:name=".project.shared.CoursActivity" />
         <activity android:name=".project.teacher.AjouterCourActivity" />
-        <activity android:name=".project.teacher.AjouterDevoirActivity" />
-        <activity android:name=".project.teacher.ReponsesActivity" />
-        <activity android:name=".project.shared.DevoirsActivity" />
         <activity android:name=".project.shared.ChatActivity" />
-        <activity android:name=".project.student.AjouterReponseActivity" />
         <activity android:name=".project.teacher.TeacherCourOperationsActivity" />
         <activity android:name=".project.student.StudentCourOperationsActivity" />
-        <activity android:name=".project.student.AjouterCourStudent"/>
+        <activity android:name=".project.student.AjouterCourStudent" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_smart"
-            />
-        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_smart" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
     </application>
 
 </manifest>

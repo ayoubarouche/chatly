@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -54,9 +55,7 @@ public class StudentCoursController implements CoursController {
 return courses;
 
     }
-    public Cour getCour(String coursId){
-        return null;
-    }
+
 
     public User getStudent() {
         return student;
@@ -80,9 +79,28 @@ return courses;
                onAfterRegisterInCour.OnCallBack();
                Log.d("studentcourcontroller", "onSuccess: student added with succes");
            }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               onAfterRegisterInCour.OnErreur();
+           }
        });
     }
+    public void quiterCour(String IdCour, final OnAfterRegisterInCour onAfterRegisterInCour){
+        db.collection("cours")
+                .document(IdCour)
+                .update("students", FieldValue.arrayRemove(student.getIdUser()))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        onAfterRegisterInCour.OnCallBack();
+                        Log.d("studentcourcontroller", "onSuccess: student added with succes");
+                    }
+                });
+    }
+
     public interface OnAfterRegisterInCour{
         public void OnCallBack();
+        public void OnErreur();
     }
 }
