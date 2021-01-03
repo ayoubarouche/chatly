@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.wrapper.controllers.UserController;
 import com.inpt.messagingapp.wrapper.models.User;
 
@@ -87,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(){
+        final loadingDialog  loading_dialog = new loadingDialog(this );
         String password = this.password_box.getText().toString();
         String email = this.email_box.getText().toString();
 
@@ -95,11 +97,13 @@ public class LoginActivity extends AppCompatActivity {
             public void OnCallBack(User user) {
                 app.setUser(user);
                 User user2 = app.getUser();
-                Toast.makeText(getApplicationContext() , "the user is : "+user2.getPrenom(),Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext() , "the user is : "+user2.getPrenom(),Toast.LENGTH_LONG).show();
+                loading_dialog.dismissdialog();
                 changeToHomePage();
             }
         });
         Toast.makeText(getApplicationContext() ,"please wait we are loging in",Toast.LENGTH_LONG).show();
+        loading_dialog.startLoadingDialog("attender on'est entrain de se connecter");
 
 
     }

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.R;
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.wrapper.controllers.student.StudentCoursController;
 
 public class AjouterCourStudent extends AppCompatActivity {
@@ -36,13 +37,14 @@ public void initialiseElements(){
     ajouter_cour_button = findViewById(R.id.ajouter_cour_button);
 }
     public void inscritCour(String courId){
+        final loadingDialog loading_dialog = new loadingDialog(this);
         application.setStudentCoursController();
         application.getStudentCoursController().inscritCour(courId, new StudentCoursController.OnAfterRegisterInCour() {
             @Override
             public void OnCallBack() {
-                Toast.makeText(getApplicationContext(),"you are registred in the cour",Toast.LENGTH_LONG).show();
+                loading_dialog.dismissdialog();
             }
         });
-        Toast.makeText(getApplicationContext(),"please wait we are registring you in the cour...",Toast.LENGTH_LONG).show();
+        loading_dialog.startLoadingDialog("attendez s'ils vous plait ...");
     }
 }

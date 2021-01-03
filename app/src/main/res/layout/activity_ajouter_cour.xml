@@ -5,7 +5,7 @@
     android:id="@+id/title_cour"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AjouterCourActivity">
+    tools:context=".project.teacher.AjouterCourActivity">
 
     <Button
         android:id="@+id/cancel"

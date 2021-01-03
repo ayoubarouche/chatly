@@ -85,8 +85,9 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardback"
+            android:id="@+id/cardshare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="fill"
@@ -110,7 +111,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Back to Courses     "
+                    android:text="ShareCode              "
                     android:textSize="26sp"
                     android:textColor="@color/colorBlack"/>
             </LinearLayout>

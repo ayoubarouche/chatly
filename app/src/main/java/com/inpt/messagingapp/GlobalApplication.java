@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.inpt.messagingapp.wrapper.controllers.FilesController;
 import com.inpt.messagingapp.wrapper.controllers.MessageController;
 import com.inpt.messagingapp.wrapper.controllers.UserController;
 import com.inpt.messagingapp.wrapper.controllers.student.DevoirReponseController;
@@ -17,6 +19,10 @@ public class GlobalApplication extends Application {
      public    UserController userController ;
      public  MessageController messageController;
     public DevoirController devoirController ;
+    public FilesController filesController;
+    public FirebaseStorage storage;
+
+    public Cour working_cour ;
     public User user;
  public FirebaseFirestore  firebase_database;
  public FirebaseAuth authentification;
@@ -53,6 +59,7 @@ public class GlobalApplication extends Application {
         super.onCreate();
         firebase_database = FirebaseFirestore.getInstance();
         authentification = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
         userController = new UserController(firebase_database,authentification);
 
     }
@@ -88,5 +95,11 @@ public class GlobalApplication extends Application {
         this.user = user;
     }
 
+    public FilesController getFilesController() {
+        return filesController;
+    }
 
+    public void setFilesController() {
+        this.filesController = new FilesController(storage);
+    }
 }

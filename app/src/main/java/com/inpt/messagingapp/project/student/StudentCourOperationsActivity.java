@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.helpers.sqliteHelpers.SqliteConnector;
 import com.inpt.messagingapp.project.shared.ChatActivity;
-import com.inpt.messagingapp.project.shared.CoursActivity;
 import com.inpt.messagingapp.project.shared.DevoirsActivity;
 
 import androidx.annotation.Nullable;
@@ -21,19 +20,19 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
     TextView title;
     CardView cardchat;
     CardView cardDev;
-    CardView cardback;
+    CardView cardshare;
     CardView carddelete;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_teacher_cour_operations);
         cardchat = findViewById(R.id.cardchat);
         cardDev = findViewById(R.id.cardDev);
-        cardback = findViewById(R.id.cardback);
+        cardshare = findViewById(R.id.cardshare);
         carddelete = findViewById(R.id.carddelete);
         title = findViewById(R.id.textview);
-
+        cardshare.setVisibility(View.GONE);
         cardchat.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -50,14 +49,7 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        cardback.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(StudentCourOperationsActivity.this, CoursActivity.class);
-                startActivity(i);
-            }
-        });
         carddelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

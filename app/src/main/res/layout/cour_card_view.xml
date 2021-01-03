@@ -53,6 +53,12 @@
                     android:textSize="6pt"
 
                     />
+                <TextView
+                    android:id="@+id/id_of_the_cour"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    />
 
 
 

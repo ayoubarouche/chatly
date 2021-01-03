@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.R;
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.wrapper.controllers.UserController;
 import com.inpt.messagingapp.wrapper.models.User;
 import com.inpt.messagingapp.wrapper.models.UserType;
@@ -117,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void register() {
+        final loadingDialog loading_dialog = new loadingDialog(this);
         String nom = this.nom_box.getText().toString();
         String password = this.password_box.getText().toString();
         String email = this.email_box.getText().toString();
@@ -130,17 +132,17 @@ public class RegisterActivity extends AppCompatActivity {
         user.setName(nom);
         user.setPrenom(prenom);
         user.setUsername(username);
-       if( app.userController.signup(user, password, new UserController.AfterGettingUser() {
+       app.userController.signup(user, password, new UserController.AfterGettingUser() {
            @Override
            public void OnCallBack(User user) {
                app.setUser(user);
-               Toast.makeText(getApplicationContext() , "the user id is "+user.getUsername(),Toast.LENGTH_LONG).show();
+               loading_dialog.dismissdialog();
                changeToHomePage();
            }
-       })){
-           app.setUser(user);
-       }
-        Toast.makeText(this, "please wait we are registring you "+type.getText(),Toast.LENGTH_LONG).show();
+
+       });
+        loading_dialog.startLoadingDialog("Entrain de créer votre compte...");
+
     }
 
     public void show_the_erreur() {

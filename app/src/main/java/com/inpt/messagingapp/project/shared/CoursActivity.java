@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.teacher.AjouterCourActivity;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.MainActivity;
@@ -29,7 +30,7 @@ public class CoursActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private GlobalApplication app ;
     private List<Cour> cours;
-
+    private loadingDialog loading_dialog ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,38 +60,40 @@ public class CoursActivity extends AppCompatActivity {
             intent = new Intent(this, AjouterCourActivity.class);
 
         }
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     public void getCoursesTeacher(){
+        loading_dialog = new loadingDialog(this);
         if(app.getTeacherCoursController()==null)app.setTeacherCoursController();
         app.getTeacherCoursController().getCourses(new TeacherCoursController.OnGettingCourses() {
             @Override
             public void OnCallBack(List<Cour> courses) {
                 cours = courses ;
-                Toast.makeText(getApplicationContext(),"the teacher courses are returned size is : "+cours.size(),Toast.LENGTH_LONG).show();
                 adapter = new CoursViewAdapter(cours, getApplicationContext(),app);
                 recyclerView.setAdapter(adapter);
+                loading_dialog.dismissdialog();
+
             }
         });
-        Toast.makeText(getApplicationContext(),"please wait we are getting the teacher courses",Toast.LENGTH_LONG).show();
+        loading_dialog.startLoadingDialog("chargement de votre cours ....");
 
     }
 
     public void getCoursesStudent(){
+        loading_dialog = new loadingDialog(this);
         if(app.getStudentCoursController()==null)app.setStudentCoursController();
         app.getStudentCoursController().getCourses(new TeacherCoursController.OnGettingCourses() {
             @Override
             public void OnCallBack(List<Cour> courses) {
                 cours = courses ;
-                Toast.makeText(getApplicationContext(),"the student courses are returned size is : "+cours.size(),Toast.LENGTH_LONG).show();
                 adapter = new CoursViewAdapter(cours, getApplicationContext(),app);
                 recyclerView.setAdapter(adapter);
+                loading_dialog.dismissdialog();
+
             }
 
         });
-        Toast.makeText(getApplicationContext(),"please wait we are getting the student courses",Toast.LENGTH_LONG).show();
-
+        loading_dialog.startLoadingDialog("rechargement de votre cours ....");
     }
 
 }

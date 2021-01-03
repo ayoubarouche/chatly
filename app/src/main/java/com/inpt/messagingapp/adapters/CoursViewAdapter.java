@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.project.shared.ChatActivity;
+import com.inpt.messagingapp.project.student.StudentCourOperationsActivity;
+import com.inpt.messagingapp.project.teacher.TeacherCourOperationsActivity;
 import com.inpt.messagingapp.wrapper.models.Cour;
 import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.wrapper.models.UserType;
@@ -23,6 +25,7 @@ import com.inpt.messagingapp.wrapper.models.UserType;
 public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.ViewHolder> {
 
    private List<Cour> cours ;
+
    private Context context;
     private  GlobalApplication application ;
     public CoursViewAdapter(List<Cour> cours, Context context,GlobalApplication application) {
@@ -37,11 +40,12 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cour_card_view, parent, false);
         v.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+               TextView textViewCour =  view.findViewById(R.id.id_of_the_cour);
                 Toast.makeText(context , "you clicked a cours",Toast.LENGTH_LONG).show();
-
-            goToPage();}
+            goToPage(textViewCour.getText().toString());}
         });
         return new ViewHolder(v);
     }
@@ -51,7 +55,8 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
         Cour cour = cours.get(position);
         holder.textViewHead.setText(cour.getTitre());
         holder.textViewDesc.setText(cour.getDescription());
-        application.setMessageController(cour);
+        holder.textViewIdCour.setText(cour.getIdCour());
+
     }
 
     @Override
@@ -63,19 +68,20 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
 
         public TextView textViewHead;
         public TextView textViewDesc;
-
+        public TextView textViewIdCour;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textViewHead = (TextView) itemView.findViewById(R.id.header);
             textViewDesc = (TextView) itemView.findViewById(R.id.description);
+            textViewIdCour = (TextView) itemView.findViewById(R.id.id_of_the_cour);
         }
     }
-    public void goToPage(){
-        Intent intent = new Intent(context, ChatActivity.class);
+    public void goToPage(String id_of_the_cour){
+        Intent intent = new Intent(context, application.getUser().getType() == UserType.teacher ? TeacherCourOperationsActivity.class : StudentCourOperationsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("id_cour",id_of_the_cour);
         context.startActivity(intent);
-
     }
 
 }

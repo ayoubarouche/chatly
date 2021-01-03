@@ -47,7 +47,7 @@ public class DevoirController {
         firebaseFirestore = firebase_database;
         documentReference = firebaseFirestore.collection("cours").document(cour.getIdCour());
     }
-    public Devoir addDevoir( Devoir devoir){
+    public Devoir addDevoir(Devoir devoir, final OnFinishingDevoirOperation onFinishingDevoirOperation){
         tempdevoir = devoir;
         final DocumentReference documentReference1= documentReference.collection("devoirs").document();
         tempdevoir.setIdDevoir(documentReference1.getId());
@@ -55,7 +55,7 @@ public class DevoirController {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("hello world", "onSuccess: the is from docuement rference is :"+documentReference1.getId());
-
+                        onFinishingDevoirOperation.OnCallBack();
                     }
                 });
         return  tempdevoir;
@@ -118,5 +118,8 @@ public class DevoirController {
                     }
                 });
         return tempReponse;
+    }
+    public interface OnFinishingDevoirOperation{
+        public void OnCallBack();
     }
 }

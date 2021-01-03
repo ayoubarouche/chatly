@@ -119,12 +119,12 @@ public class TeacherCoursController implements CoursController {
   //      courFirebase.setIdCour(documentReference.getId() );
     return  courFirebase.OriginalCours();
     }
-    public void deleteCour(Cour cour){
+    public void deleteCour(Cour cour, final OnCourDeleted onCourDeleted){
         db.collection("cours").document(cour.getIdCour()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "onSuccess: delete with succes");
-
+                    onCourDeleted.OnCallBack();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -138,5 +138,8 @@ public class TeacherCoursController implements CoursController {
     }
     public interface OnCourAdded{
         public void onCallBack(Cour cour);
+    }
+    public interface OnCourDeleted{
+        public void OnCallBack();
     }
 }
