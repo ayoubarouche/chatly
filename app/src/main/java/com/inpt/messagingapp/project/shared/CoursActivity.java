@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.teacher.AjouterCourActivity;
 import com.inpt.messagingapp.GlobalApplication;
@@ -39,10 +40,10 @@ public class CoursActivity extends AppCompatActivity {
     private loadingDialog loading_dialog ;
     private Toolbar toolbar;
     private ImageView imageView ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app.authentification = FirebaseAuth.getInstance();
         setContentView(R.layout.consulter_cours_teacher);
         Button ajouter = findViewById(R.id.ajouter_button);
         imageView = findViewById(R.id.imageView4);
@@ -99,14 +100,13 @@ public class CoursActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.logout :
-                app.authentification.getInstance().signOut();
-                startActivity(new Intent(CoursActivity.this, LoginActivity.class));
+        if (item.getItemId()==R.id.logout){
+                Intent intent = new Intent(CoursActivity.this, LoginActivity.class);
+                app.authentification.signOut();
+                startActivity(intent);
                 return true;
-            default:
-                return super.onContextItemSelected(item);
         }
+        return super.onContextItemSelected(item);
     }
 
     public void getCoursesStudent(){
