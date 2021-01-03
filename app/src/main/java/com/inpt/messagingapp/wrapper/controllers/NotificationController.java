@@ -49,11 +49,6 @@ public class NotificationController {
         public  void OnCallBack();
         public void OnFailed();
     }
-    public void sendNotificationToOthers(String from , String cour_name , String to , Message message){
-        RemoteMessage remoteMessage = new RemoteMessage.Builder("").addData("title",cour_name)
-                .addData("from",from).addData("text",message.getMessage()).build();
-
-    }
     public void sendNotificationToOthers(Context context , String from_name ,String cour_name,String to ,  Message message,OnTopicSubscribed onTopicSubscribed){
         final  String FCM_API = "https://fcm.googleapis.com/fcm/send";
         final  String serverKey = "key=" + "AAAAwxvaADM:APA91bGoOp9f_yngCeRgecIEhqPTcA6qRmeJKF7IBSF5zl1w7VLJ9H_dnk1sG6orZiC5_WKsJjqHKNPtXPg3ChAWkAQM9f9XtABfuK0XQIRV-9tBAAui4CcNN7CV_NgVHhubGs7oUdNZ";

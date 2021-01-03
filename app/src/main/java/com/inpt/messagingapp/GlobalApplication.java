@@ -19,28 +19,29 @@ import com.inpt.messagingapp.wrapper.models.Cour;
 import com.inpt.messagingapp.wrapper.models.User;
 
 public class GlobalApplication extends Application {
-     public    UserController userController ;
-     public  MessageController messageController;
+    public UserController userController;
+    public MessageController messageController;
 
     public FilesController filesController;
     public FirebaseStorage storage;
     public FirebaseMessaging firebaseMessaging;
-    public Cour working_cour ;
+    public Cour working_cour;
     public User user;
 
- public FirebaseFirestore  firebase_database;
- public FirebaseAuth authentification;
+    public FirebaseFirestore firebase_database;
+    public FirebaseAuth authentification;
     public TeacherCoursController teacherCoursController;
-    public StudentCoursController studentCoursController ;
+    public StudentCoursController studentCoursController;
 
     public NotificationController notificationController;
-    public SqliteConnector localdatabase ;
+    public SqliteConnector localdatabase;
+
     public TeacherCoursController getTeacherCoursController() {
         return teacherCoursController;
     }
 
     public void setTeacherCoursController() {
-        this.teacherCoursController = new TeacherCoursController(firebase_database,user);
+        this.teacherCoursController = new TeacherCoursController(firebase_database, user);
     }
 
     public NotificationController getNotificationController() {
@@ -56,7 +57,7 @@ public class GlobalApplication extends Application {
     }
 
     public void setStudentCoursController() {
-        this.studentCoursController = new StudentCoursController(firebase_database,user);
+        this.studentCoursController = new StudentCoursController(firebase_database, user);
     }
 
 
@@ -76,8 +77,8 @@ public class GlobalApplication extends Application {
         storage = FirebaseStorage.getInstance();
         firebaseMessaging = FirebaseMessaging.getInstance();
         localdatabase = new SqliteConnector(this);
-        userController = new UserController(firebase_database,authentification);
-       Intent intent = new Intent(this, GlobalFireBaseMessagingService.class);
+        userController = new UserController(firebase_database, authentification);
+        Intent intent = new Intent(this, GlobalFireBaseMessagingService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             this.getApplicationContext().startForegroundService(intent);
         } else {
@@ -91,9 +92,8 @@ public class GlobalApplication extends Application {
     }
 
     public void setMessageController(Cour cour) {
-        this.messageController = new MessageController(firebase_database,cour );
+        this.messageController = new MessageController(firebase_database, cour);
     }
-
 
 
     public User getUser() {

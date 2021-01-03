@@ -37,10 +37,11 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cour_card_view, parent, false);
-        v.setOnClickListener(new View.OnClickListener() {
+       if(application.getUser()!=null) v.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+
                 TextView textViewCour = view.findViewById(R.id.id_of_the_cour);
                 Toast.makeText(context, "you clicked a cours", Toast.LENGTH_LONG).show();
                 goToPage(textViewCour.getText().toString());

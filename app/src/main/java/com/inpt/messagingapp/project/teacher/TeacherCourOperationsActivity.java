@@ -129,7 +129,6 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
            public void OnCallBack(Cour cour) {
                loading_dialog.dismissdialog();
                public_cour = cour ;
-               Toast.makeText(getApplicationContext(), "cours infor received successifly..." ,Toast.LENGTH_SHORT).show();
                 title.setText(cour.getTitre());
            }
 

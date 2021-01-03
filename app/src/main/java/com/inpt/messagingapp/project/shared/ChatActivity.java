@@ -52,7 +52,6 @@ public class ChatActivity extends AppCompatActivity {
         app.setMessageController(cour);
 
         getMessages();
-        Toast.makeText(this,"the cour id  is : "+app.getMessageController().getCour().getIdCour(),Toast.LENGTH_LONG).show();
         sendfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +68,6 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void OnCallBack(List<Message> messages) {
                 mymessages = messages;
-                Toast.makeText(getApplicationContext(),"the messages is returned",Toast.LENGTH_LONG).show();
                 updateMessages(mymessages);
                 loading_dialog.dismissdialog();
             }
@@ -96,13 +94,11 @@ public class ChatActivity extends AppCompatActivity {
             app.getNotificationController().sendNotificationToOthers(getApplicationContext(), app.getUser().getName(), nameCour, idCour, message, new NotificationController.OnTopicSubscribed() {
                 @Override
                 public void OnCallBack() {
-                    Toast.makeText(getApplicationContext(),"notification sent to others "+ nameCour,Toast.LENGTH_SHORT).show();
 
                 }
 
                 @Override
                 public void OnFailed() {
-                    Toast.makeText(getApplicationContext(),"notification not sent to others !!!",Toast.LENGTH_SHORT).show();
 
                 }
             });

@@ -82,14 +82,13 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("QUESTION ");
         builder.setMessage("TU VEUX SUPPRIMER LE COUR ?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 app.getStudentCoursController().quiterCour(id_cour, new StudentCoursController.OnAfterRegisterInCour() {
                     @Override
                     public void OnCallBack() {
-                        SqliteConnector myDB = new SqliteConnector(StudentCourOperationsActivity.this);
-                        myDB.deleteCourL(id_cour);
+                        app.getLocaldatabase().deleteCourL(id_cour);
                         loading_dialog.dismissdialog();
                         Toast.makeText(getApplicationContext(),"cour ",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), CoursActivity.class);
@@ -107,7 +106,7 @@ public class StudentCourOperationsActivity extends AppCompatActivity {
 loading_dialog.startLoadingDialog("suppression du cour....");
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 

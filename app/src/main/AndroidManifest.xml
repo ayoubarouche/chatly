@@ -27,21 +27,24 @@
         </service>
 
         <activity android:name=".project.shared.LoginActivity">
+
+        </activity>
+        <activity android:name=".project.shared.RegisterActivity" />
+        <activity android:name=".project.WelcomeActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".project.shared.RegisterActivity" />
-        <activity android:name=".project.WelcomeActivity" />
         <activity android:name=".project.shared.CoursActivity" />
         <activity android:name=".project.teacher.AjouterCourActivity" />
         <activity android:name=".project.shared.ChatActivity" />
         <activity android:name=".project.teacher.TeacherCourOperationsActivity" />
         <activity android:name=".project.student.StudentCourOperationsActivity" />
         <activity android:name=".project.student.AjouterCourStudent" />
-
+        <activity android:name=".project.shared.OfflineCoursActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

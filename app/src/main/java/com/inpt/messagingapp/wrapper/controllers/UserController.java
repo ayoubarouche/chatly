@@ -98,22 +98,7 @@ public class UserController {
         });
 return true;
     }
-    private User getUser(String userid){
 
-        db.collection("users").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                setTempuser(documentSnapshot.toObject(User.class));
-            }
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("usercontroller", "onFailure: it not finded");
-            }
-        });
-        return tempuser ;
-    }
     private User getUser(String userid, final AfterGettingUser afterGettingUser){
 
         db.collection("users").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

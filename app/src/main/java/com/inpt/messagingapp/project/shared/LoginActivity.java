@@ -99,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                 app.setUser(user);
                 app.getLocaldatabase().addLocale(user);
                 User user2 = app.getUser();
-               // Toast.makeText(getApplicationContext() , "the user is : "+user2.getPrenom(),Toast.LENGTH_LONG).show();
                 loading_dialog.dismissdialog();
                 changeToHomePage();
             }
@@ -110,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                 confirmDialog();
             }
         });
-        Toast.makeText(getApplicationContext() ,"please wait we are loging in",Toast.LENGTH_LONG).show();
         loading_dialog.startLoadingDialog("connexion en cours ...");
 
 
