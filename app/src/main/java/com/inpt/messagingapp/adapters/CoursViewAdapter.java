@@ -43,7 +43,6 @@ public class CoursViewAdapter extends RecyclerView.Adapter<CoursViewAdapter.View
             public void onClick(View view) {
 
                 TextView textViewCour = view.findViewById(R.id.id_of_the_cour);
-                Toast.makeText(context, "you clicked a cours", Toast.LENGTH_LONG).show();
                 goToPage(textViewCour.getText().toString());
             }
         });

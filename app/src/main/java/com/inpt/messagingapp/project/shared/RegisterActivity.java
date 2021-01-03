@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     int selected_id ; // fot type user selected i will need it in the chekch button
     static String erreur ; // when we have and erreur
     GlobalApplication app ;
+    loadingDialog loading_dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void register() {
-        final loadingDialog loading_dialog = new loadingDialog(this);
+      loading_dialog = new loadingDialog(this);
         String nom = this.nom_box.getText().toString();
         String password = this.password_box.getText().toString();
         String email = this.email_box.getText().toString();

@@ -83,8 +83,8 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
     }
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + title.getText().toString().trim() + " ?");
-        builder.setMessage("Are you sure you want to delete " + title + " ?");
+        builder.setTitle("question ?");
+        builder.setMessage(" tu veux vraiment supprimer le cour ?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

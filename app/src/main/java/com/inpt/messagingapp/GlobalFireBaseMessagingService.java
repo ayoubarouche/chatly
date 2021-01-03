@@ -73,7 +73,7 @@ public class GlobalFireBaseMessagingService extends FirebaseMessagingService {
         else {
             channel = "";
         }
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel).setSmallIcon(android.R.drawable.ic_menu_mylocation).setContentTitle("snap map fake location");
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel).setSmallIcon(android.R.drawable.ic_menu_mylocation).setContentTitle("SmartClass");
         Notification notification = mBuilder
                 .setPriority(Notification.PRIORITY_LOW)
                 .setCategory(Notification.CATEGORY_SERVICE)

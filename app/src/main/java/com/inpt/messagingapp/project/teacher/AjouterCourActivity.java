@@ -1,52 +1,33 @@
 package com.inpt.messagingapp.project.teacher;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUtils;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.R;
-import com.inpt.messagingapp.helpers.sqliteHelpers.SqliteConnector;
 import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.project.shared.CoursActivity;
 import com.inpt.messagingapp.wrapper.controllers.FilesController;
 import com.inpt.messagingapp.wrapper.controllers.NotificationController;
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
-import com.inpt.messagingapp.wrapper.models.Devoir;
-import com.inpt.messagingapp.wrapper.models.Message;
-import com.inpt.messagingapp.wrapper.models.User;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
 
 public class AjouterCourActivity extends AppCompatActivity {
-    private static final int PICK_FILE = 1 ;
+    private static final int PICK_FILE = 1;
     int REQUEST_CODE = 12;
-    private DatabaseReference databaseReference;
     EditText title_input, description_input, file_input;
     Button add_button, cancel_button;
     ImageView upFile;
@@ -54,13 +35,15 @@ public class AjouterCourActivity extends AppCompatActivity {
     Cour new_cour;
     GlobalApplication app;
     loadingDialog loading_dialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_cour);
-        app = (GlobalApplication)getApplication();
+        app = (GlobalApplication) getApplication();
         title_input = findViewById(R.id.addtitre);
         description_input = findViewById(R.id.addDescription);
         file_input = findViewById(R.id.addfile);
@@ -70,9 +53,10 @@ public class AjouterCourActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new_cour = new Cour(null, app.getUser().getIdUser(), null, null, null,description_input.getText().toString(),title_input.getText().toString(),file_input.getText().toString());
-              if(uri!=null) AddCour();
-            else Toast.makeText(getApplicationContext(),"please select a file",Toast.LENGTH_LONG).show();
+                new_cour = new Cour(null, app.getUser().getIdUser(), null, null, null, description_input.getText().toString(), title_input.getText().toString(), file_input.getText().toString());
+                if (uri != null) AddCour();
+                else
+                    Toast.makeText(getApplicationContext(), "please select a file", Toast.LENGTH_LONG).show();
             }
         });
         cancel_button.setOnClickListener(new View.OnClickListener() {
@@ -84,10 +68,12 @@ public class AjouterCourActivity extends AppCompatActivity {
         upFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-    showFileChooser();
-            }});
+                showFileChooser();
+            }
+        });
     }
-    public void addCour(final Cour new_cour1){
+
+    public void addCour(final Cour new_cour1) {
         app.setTeacherCoursController();
         app.setNotificationController();
         app.teacherCoursController.addCour(new_cour1, new TeacherCoursController.OnCourAdded() {
@@ -104,12 +90,11 @@ public class AjouterCourActivity extends AppCompatActivity {
 
                     @Override
                     public void OnFailed() {
-                loading_dialog.dismissdialog();
-                confirmDialog();
+                        loading_dialog.dismissdialog();
+                        confirmDialog();
                     }
                 });
                 loading_dialog.dismissdialog();
-                Toast.makeText(getApplicationContext() ,"the cour is added cour_id is : "+cour.getIdCour(),Toast.LENGTH_LONG).show();
 
                 goToCours();
             }
@@ -120,18 +105,16 @@ public class AjouterCourActivity extends AppCompatActivity {
                 confirmDialog();
             }
         });
-        Toast.makeText(getApplicationContext() ,"we are adding the cours",Toast.LENGTH_SHORT).show();
-        loading_dialog.dismissdialog();
         loading_dialog.startLoadingDialog("enregistrement du cour ....");
     }
-    public void goToCours(){
+
+    public void goToCours() {
         Intent intent = new Intent(this, CoursActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         this.finish();
 
     }
-
 
 
     public void showFileChooser() {
@@ -149,6 +132,7 @@ public class AjouterCourActivity extends AppCompatActivity {
         // REQUEST_CODE = <some-integer>
         startActivityForResult(intent, REQUEST_CODE);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // If the user doesn't pick a file just return
@@ -165,8 +149,7 @@ public class AjouterCourActivity extends AppCompatActivity {
         String fileName = getFileName(uri);
 
         // The temp file could be whatever you want
-       Toast.makeText(getApplicationContext(),fileName, Toast.LENGTH_LONG).show();
-
+        file_input.setText(fileName);
         // Done!
     }
 
@@ -195,28 +178,30 @@ public class AjouterCourActivity extends AppCompatActivity {
 
         return fileName;
     }
-        public void AddCour(){
+
+    public void AddCour() {
         loading_dialog = new loadingDialog(this);
-            app.setFilesController();
-            app.getFilesController().addToStorage(uri, "courses", new FilesController.OnAfterUploading() {
-                @Override
-                public void OnCallBack(String file_url) {
-                    new_cour.setFile(String.valueOf(file_url));
-                    Toast.makeText(getApplicationContext(),"the file is added",Toast.LENGTH_LONG).show();
+        app.setFilesController();
+        app.getFilesController().addToStorage(uri, "courses", new FilesController.OnAfterUploading() {
+            @Override
+            public void OnCallBack(String file_url) {
+                new_cour.setFile(String.valueOf(file_url));
+                Toast.makeText(getApplicationContext(), "le fichier est telecharger", Toast.LENGTH_LONG).show();
 
-                    addCour(new_cour);
-                }
+                addCour(new_cour);
+            }
 
-                @Override
-                public void OnErreur() {
-                    loading_dialog.dismissdialog();
-                    confirmDialog();
-                }
-            });
-            loading_dialog.startLoadingDialog(getString(R.string.msg_ajouter_cours));
+            @Override
+            public void OnErreur() {
+                loading_dialog.dismissdialog();
+                confirmDialog();
+            }
+        });
+        loading_dialog.startLoadingDialog(getString(R.string.msg_ajouter_cours));
 
-        }
-    void confirmDialog(){
+    }
+
+    void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Erreur");
         builder.setMessage(" problème de la connextion !  :");

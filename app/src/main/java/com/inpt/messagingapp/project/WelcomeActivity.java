@@ -29,6 +29,21 @@ public class WelcomeActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(isConnectedToInternet()){
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this , OfflineCoursActivity.class);
+            startActivity(intent);
+
+        }
+    }
+
     private boolean isConnectedToInternet(){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
