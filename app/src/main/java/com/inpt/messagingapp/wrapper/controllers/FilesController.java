@@ -1,6 +1,9 @@
 package com.inpt.messagingapp.wrapper.controllers;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.net.Uri;
+import android.os.Environment;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +37,17 @@ public class FilesController {
         });
 
 
+    }
+    public long downloadFile(Context context, String fileName, String fileExtension, String url) {
+        String destinationDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        DownloadManager downloadmanager = (DownloadManager) context.
+                getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context, destinationDirectory, fileName + fileExtension);
+
+        return downloadmanager.enqueue(request);
     }
     public interface OnAfterUploading{
         public void OnCallBack(String file_url);
