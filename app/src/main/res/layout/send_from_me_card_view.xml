@@ -49,7 +49,8 @@
                         android:paddingVertical="0.3dp"
                         android:text="heading"
                         android:textAlignment="textStart"
-                        android:textColor="#ffff"
+                        android:textColor="@android:color/white"
+                        android:textColorHighlight="@android:color/white"
                         android:textSize="5pt" />
 
 
@@ -60,15 +61,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:paddingLeft="15dp"
                     android:paddingHorizontal="20dp"
+                    android:paddingLeft="15dp"
                     android:paddingVertical="0.3dp"
                     android:text="lkdjf jdlkjfkd kldjkld kldj fldkjdkl fjkldfj kdljfk dljfkdl jfkldj fkldjf kld jf kldjfk djkfl jdkjkfldj dkjfkld jfkldj fk"
                     android:textAlignment="textStart"
                     android:textColor="#fff"
-                    android:textSize="7pt"
+                    android:textColorHighlight="@android:color/white"
 
-                    />
+                    android:textSize="7pt" />
 
 
             </LinearLayout>
