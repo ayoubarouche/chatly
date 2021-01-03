@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">SmartClass</string>
     <string name="email_box">E-mail</string>
     <string name="nom_box">votre nom </string>
     <string name="password_box">mot de passe</string>
