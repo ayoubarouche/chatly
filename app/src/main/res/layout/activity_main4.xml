@@ -7,35 +7,50 @@
     android:background="@drawable/add_msg_bg"
     tools:context=".project.shared.ChatActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorBleuOutremer"
+        android:paddingTop="8dp"
+        android:text="  Chat Session"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/add_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/add_msg_bg"
         android:elegantTextHeight="true"
-        android:hint="Taper message"
+        android:hint="Add message"
         android:paddingBottom="10dp"
         android:paddingLeft="40dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
     <ImageView
         android:id="@+id/addfile"
         android:layout_width="35dp"
         android:layout_height="40dp"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/add_msg"
         app:layout_constraintStart_toStartOf="@+id/add_msg"
         app:layout_constraintTop_toTopOf="@+id/add_msg"
         app:srcCompat="@drawable/ic_add_file" />
-
 
     <ImageView
         android:id="@+id/sendmsg"
@@ -48,30 +63,15 @@
         app:layout_constraintTop_toTopOf="@+id/add_msg"
         app:srcCompat="@drawable/ic_baseline_send_24" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorBleuOutremer"
-        android:paddingTop="8dp"
-        android:text=" Session de Chat"
-        android:textColor="@color/cardview_light_background"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatrecyclerview"
-        android:layout_width="413dp"
-        android:layout_height="527dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:background="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/add_msg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/add_msg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

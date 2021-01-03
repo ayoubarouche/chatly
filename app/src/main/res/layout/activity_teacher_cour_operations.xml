@@ -47,9 +47,41 @@
                     android:src="@drawable/ic_chat"/>
 
                 <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="47dp"
+                    android:text=" Session de Chat"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="26sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_row="1"
+            android:layout_column="0"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Session de Chat      "
+                    android:src="@drawable/ic_devoir"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Télécharger Cours"
                     android:textColor="@color/colorBlack"
                     android:textSize="26sp" />
             </LinearLayout>
@@ -68,19 +100,21 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true">
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="323dp"
+                android:layout_height="84dp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_cours"/>
+                    android:src="@drawable/ic_cours" />
 
                 <TextView
-                    android:layout_width="233dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Partager Code Cours"
                     android:textColor="@color/colorBlack"
@@ -112,7 +146,7 @@
                     android:src="@drawable/ic_delete"/>
 
                 <TextView
-                    android:layout_width="232dp"
+                    android:layout_width="233dp"
                     android:layout_height="wrap_content"
                     android:text=" Supprimer Cours"
                     android:textColor="@color/colorBlack"
