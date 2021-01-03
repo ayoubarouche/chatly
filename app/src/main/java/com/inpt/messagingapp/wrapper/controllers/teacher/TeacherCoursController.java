@@ -63,17 +63,15 @@ public class TeacherCoursController implements CoursController {
                 });
         return courses;
     }
-    public boolean supprimerCour(String coursId){
-        return true;
-    }
-    public Cour getCour(String courseId) {
+
+    public Cour getCour(String courseId, final OnGetCourFinished onGetCourFinished) {
 
         tempcour = new CourFirebase();
         db.collection("cours").document(courseId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 tempcour = (CourFirebase) documentSnapshot.toObject(CourFirebase.class);
-
+                    onGetCourFinished.OnCallBack(tempcour.OriginalCours());
             }
         });
         return tempcour.OriginalCours();
@@ -141,5 +139,8 @@ public class TeacherCoursController implements CoursController {
     }
     public interface OnCourDeleted{
         public void OnCallBack();
+    }
+    public interface OnGetCourFinished{
+        public void OnCallBack(Cour cour);
     }
 }

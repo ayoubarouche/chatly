@@ -28,12 +28,12 @@ import com.inpt.messagingapp.wrapper.models.UserType;
 public class TeacherCourOperationsActivity extends AppCompatActivity {
     TextView title;
     CardView cardchat;
-    CardView cardDev;
     CardView cardshare;
     CardView carddelete;
     GlobalApplication app ;
     String id_cour ;
     Intent i;
+    Cour public_cour ;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +41,8 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
         id_cour = intent.getStringExtra("id_cour");
         setContentView(R.layout.activity_teacher_cour_operations);
         app = (GlobalApplication)getApplication();
-        cardchat = findViewById(R.id.cardchat);
-        cardDev = findViewById(R.id.cardDev);
+        initialisingTheCour(id_cour);
+            cardchat = findViewById(R.id.cardchat);
         cardshare = findViewById(R.id.cardshare);
         carddelete = findViewById(R.id.carddelete);
         title = findViewById(R.id.textview);
@@ -58,19 +58,12 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
+                i.putExtra("name_cour",public_cour.getTitre());
                 i.putExtra("id_cour",id_cour);
                 startActivity(i);
             }
         });
-        cardDev.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), DevoirsActivity.class);
-                startActivity(i);
-            }
-        });
 
         carddelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,5 +118,20 @@ public class TeacherCourOperationsActivity extends AppCompatActivity {
         }
         Toast.makeText(getApplicationContext() , "text copied" ,Toast.LENGTH_SHORT).show();
     }
+    public void initialisingTheCour(String cour_id){
 
+        app.setTeacherCoursController();
+
+         app.teacherCoursController.getCour(cour_id, new TeacherCoursController.OnGetCourFinished() {
+           @Override
+           public void OnCallBack(Cour cour) {
+               public_cour = cour ;
+               Toast.makeText(getApplicationContext(), "cours infor received successifly..." ,Toast.LENGTH_SHORT).show();
+                title.setText(cour.getTitre());
+           }
+       });
+         Toast.makeText(getApplicationContext(), "getting the cours informations..." ,Toast.LENGTH_SHORT).show();
+
+
+    }
 }

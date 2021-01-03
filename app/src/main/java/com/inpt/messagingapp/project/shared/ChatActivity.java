@@ -17,6 +17,7 @@ import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.adapters.ChatViewAdapter;
 import com.inpt.messagingapp.loadingDialog;
 import com.inpt.messagingapp.wrapper.controllers.MessageController;
+import com.inpt.messagingapp.wrapper.controllers.NotificationController;
 import com.inpt.messagingapp.wrapper.models.Cour;
 import com.inpt.messagingapp.wrapper.models.Message;
 
@@ -32,12 +33,14 @@ public class ChatActivity extends AppCompatActivity {
     EditText message_text ;
     Message message1 ; // for helping sending the message
     String idCour ; // for getting the id of the cour
+    String nameCour ; // the name of the cour
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
         Intent intent = getIntent();
         idCour = intent.getStringExtra("id_cour");
+        nameCour = intent.getStringExtra("name_cour");
         recyclerView = (RecyclerView) findViewById(R.id.chatrecyclerview);
         sendfile = findViewById(R.id.sendmsg);
         message_text = findViewById(R.id.add_msg);
@@ -47,6 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         Cour cour = new Cour();
         cour.setIdCour(idCour);
         app.setMessageController(cour);
+
         getMessages();
         Toast.makeText(this,"the cour id  is : "+app.getMessageController().getCour().getIdCour(),Toast.LENGTH_LONG).show();
         sendfile.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
     public void addMessage(String message_text){
+        app.setNotificationController();
         message1 = new Message();
         Date date = new Date();
         message1.setDate(new Date());
@@ -88,6 +93,19 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void OnCallBack(Message message) {
                 message1 = message ;
+            app.getNotificationController().sendNotificationToOthers(getApplicationContext(), app.getUser().getName(), nameCour, idCour, message, new NotificationController.OnTopicSubscribed() {
+                @Override
+                public void OnCallBack() {
+                    Toast.makeText(getApplicationContext(),"notification sent to others "+ nameCour,Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void OnFailed() {
+                    Toast.makeText(getApplicationContext(),"notification not sent to others !!!",Toast.LENGTH_SHORT).show();
+
+                }
+            });
             }
         });
     }

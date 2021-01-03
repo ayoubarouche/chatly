@@ -28,6 +28,7 @@ import com.inpt.messagingapp.R;
 import com.inpt.messagingapp.helpers.sqliteHelpers.SqliteConnector;
 import com.inpt.messagingapp.project.shared.CoursActivity;
 import com.inpt.messagingapp.wrapper.controllers.FilesController;
+import com.inpt.messagingapp.wrapper.controllers.NotificationController;
 import com.inpt.messagingapp.wrapper.controllers.teacher.TeacherCoursController;
 import com.inpt.messagingapp.wrapper.models.Cour;
 import com.inpt.messagingapp.wrapper.models.Devoir;
@@ -82,12 +83,24 @@ public class AjouterCourActivity extends AppCompatActivity {
     showFileChooser();
             }});
     }
-    public void addCour(Cour new_cour1){
+    public void addCour(final Cour new_cour1){
         app.setTeacherCoursController();
+        app.setNotificationController();
         app.teacherCoursController.addCour(new_cour1, new TeacherCoursController.OnCourAdded() {
             @Override
             public void onCallBack(Cour cour) {
                 new_cour = cour;
+                app.getNotificationController().registerToTopic(cour.getIdCour(), new NotificationController.OnTopicSubscribed() {
+                    @Override
+                    public void OnCallBack() {
+                        Toast.makeText(getApplicationContext(),"you will receive the notifications",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void OnFailed() {
+
+                    }
+                });
                 /*SqliteConnector myDB = new SqliteConnector(AjouterCourActivity.this);
                 myDB.addLocale(new_cour);
                 */

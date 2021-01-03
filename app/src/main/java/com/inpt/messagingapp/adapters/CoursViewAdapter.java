@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.inpt.messagingapp.GlobalApplication;
 import com.inpt.messagingapp.MainActivity;
 import com.inpt.messagingapp.project.shared.ChatActivity;
+import com.inpt.messagingapp.project.shared.CoursActivity;
 import com.inpt.messagingapp.project.student.StudentCourOperationsActivity;
 import com.inpt.messagingapp.project.teacher.TeacherCourOperationsActivity;
 import com.inpt.messagingapp.wrapper.models.Cour;
