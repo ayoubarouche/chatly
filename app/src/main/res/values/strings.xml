@@ -8,4 +8,9 @@
     <string name="login"><u>se connecter ?</u></string>
     <string name="register_btn">créer un compte</string>
     <string name="login_btn">connexion</string>
+    <string name="msg_register">En cours d\'inscription, veuillez patienter..</string>
+    <string name="msg_ajouter_cours">Ajout de cours en progrès, veuillez patienter..</string>
+    <string name="msg_suppr_cours">Suppression de cours en progrès, veuillez patienter..</string>
+    <string name="msg_telecharg_cours">Téléchargement de cours en progrès, veuillez patienter..</string>
+    <string name="msg_msg">Téléchargement des messages en progrès, veuillez patienter..</string>
 </resources>
